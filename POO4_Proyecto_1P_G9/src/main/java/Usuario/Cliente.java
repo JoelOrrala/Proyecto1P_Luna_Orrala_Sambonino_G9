@@ -5,8 +5,8 @@ package Usuario;
  */
 public class Cliente extends Usuario {
     protected int numeroTarjeta;
-    public Cliente(String cedula, String apellido, int edad, String correo, String usuario, String contrasenia, int numeroTarjeta){
-        super(cedula,apellido,edad,correo,usuario,contrasenia);
+    public Cliente(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, int numeroTarjeta){
+        super(cedula,nombre,apellido,edad,correo,usuario,contrasenia);
         this.numeroTarjeta = numeroTarjeta;
     }
 
@@ -21,6 +21,7 @@ public class Cliente extends Usuario {
     public void comprarTicket(){
         
     }
+    
     @Override
     public void consultarReserva(){
         

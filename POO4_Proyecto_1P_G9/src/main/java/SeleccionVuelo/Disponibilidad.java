@@ -6,8 +6,8 @@ package SeleccionVuelo;
 
 /**
  *
- * @author Giovanni
+ * @author joelorrala
  */
-public enum Tarifa {
-    ECONOMY,PREMIUM_ECONOMY,PREMIUM_BUSINESS
+public enum Disponibilidad {
+    S,N
 }

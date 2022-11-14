@@ -8,6 +8,6 @@ package ProcesoReserva;
  *
  * @author joelorrala
  */
-public enum metodoPago {
-    millas,tarjetaDeCredito
+public enum MetodoPago {
+    MILLAS,TARJETA_CREDITO
 }

@@ -20,16 +20,32 @@ public class Reserva {
         return codigo;
     }
     
+    public void setCodigo(String codigo){
+        this.codigo = codigo;
+    }
+    
     public ArrayList<vueloReservado> getVuelos(){
         return vuelos;
+    }
+    
+    public void setVueloReservado(ArrayList<vueloReservado> vuelos){
+        this.vuelos = vuelos;
     }
     
     public String getFechaReserva(){
         return fechaReserva;
     }
     
+    public void setFechaReserva(String fechaReserva){
+        this.fechaReserva = fechaReserva;
+    }
+    
     public Cliente getCliente(){
         return cliente;
+    }
+    
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
     }
     
     public void consultarReserva(){

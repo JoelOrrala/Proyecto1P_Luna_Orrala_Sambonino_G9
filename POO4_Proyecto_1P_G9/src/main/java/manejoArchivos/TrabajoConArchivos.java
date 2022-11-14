@@ -4,6 +4,7 @@
  */
 package manejoArchivos;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,8 +22,11 @@ public class TrabajoConArchivos {
 //        ManejoArchivos.EscribirArchivo("archivosalida.txt","Hola!");
 //        ManejoArchivos.EscribirArchivo("archivosalida.txt","Afios!");
 //        ManejoArchivos.EscribirArchivo("archivosalida.txt","NUevo!");
-        ManejoArchivos.LeeFichero("usuarios.txt");
-        Date today = Calendar.getInstance().getTime();
+         ArrayList<String> lista = ManejoArchivos.LeeFichero("usuarios.txt");
+//         for (String linea: lista){
+//             System.out.println(linea);
+//         }
+         Date today = Calendar.getInstance().getTime();
          System.out.println(today);
         
         

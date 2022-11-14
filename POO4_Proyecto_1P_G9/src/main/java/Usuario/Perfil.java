@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
  */
-package SeleccionVuelo;
+package Usuario;
 
 /**
  *
- * @author Giovanni
+ * @author joelorrala
  */
-public enum Tarifa {
-    ECONOMY,PREMIUM_ECONOMY,PREMIUM_BUSINESS
+public enum Perfil {
+    S,V,O
 }

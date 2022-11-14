@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class Avion {
     private String codigo;
     private int capacidad;
-    private ArrayList<Integer> listaAsiento;
+    private ArrayList<Asiento> listaAsiento;
 
-    public Avion(String codigo, int capacidad, ArrayList<Integer> listaAsiento) {
+    public Avion(String codigo, int capacidad, ArrayList<Asiento> listaAsiento) {
         this.codigo = codigo;
         this.capacidad = capacidad;
         this.listaAsiento = listaAsiento;
@@ -36,11 +36,11 @@ public class Avion {
         this.capacidad = capacidad;
     }
 
-    public ArrayList<Integer> getListaAsiento() {
+    public ArrayList<Asiento> getListaAsiento() {
         return listaAsiento;
     }
 
-    public void setListaAsiento(ArrayList<Integer> listaAsiento) {
+    public void setListaAsiento(ArrayList<Asiento> listaAsiento) {
         this.listaAsiento = listaAsiento;
     }
     

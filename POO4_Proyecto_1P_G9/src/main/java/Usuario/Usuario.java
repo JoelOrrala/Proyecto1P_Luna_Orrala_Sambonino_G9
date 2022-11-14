@@ -11,9 +11,11 @@ public abstract class Usuario {
     protected String correo;
     protected String usuario;
     protected String contrasenia;
+    protected Perfil perfil;
 
-    public Usuario(String cedula, String apellido, int edad, String correo, String usuario, String contrasenia) {
+    public Usuario(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia) {
         this.cedula = cedula;
+        this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.correo = correo;
@@ -80,7 +82,7 @@ public abstract class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", correo=" + correo + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", perfil=" + perfil + '}';
+        return "Usuario{" + "cedula = " + cedula + ", nombre = " + nombre + ", apellido = " + apellido + ", edad = " + edad + ", correo = " + correo + ", usuario = " + usuario + ", contrasenia = " + contrasenia + ", perfil = " + perfil + '}';
     }
     
     public void consultarReserva(){
