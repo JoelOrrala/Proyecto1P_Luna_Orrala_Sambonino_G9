@@ -19,4 +19,8 @@ public class Operador extends Usuario {
         this.sueldo = sueldo;
     }
     
+    @Override
+    public void consultarReserva(){
+    }
+    
 }
