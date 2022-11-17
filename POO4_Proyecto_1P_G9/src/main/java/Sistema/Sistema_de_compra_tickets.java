@@ -12,6 +12,7 @@ import Usuario.Operador;
 import Usuario.Perfil;
 import Usuario.Usuario;
 import java.util.ArrayList;
+import java.util.Scanner;
 import manejoArchivos.ManejoArchivos;
 
 /**
@@ -22,6 +23,13 @@ public class Sistema_de_compra_tickets {
     
     private  ArrayList<Usuario> usuarios;
     private ArrayList<Reserva> reservas;
+    private Scanner sc;
+ 
+    public Sistema_de_compra_tickets(){
+        sc = new Scanner(System.in);
+        usuarios = new ArrayList<>(); 
+        reservas = new ArrayList<>(); 
+    }
     
     public ArrayList<Usuario> getUsuarios(){
         return usuarios;
@@ -39,7 +47,7 @@ public class Sistema_de_compra_tickets {
         this.reservas = reservas;
     }
     
-    public void cargarUsuarios(){
+    public void GenerarUsuarios(){
         ArrayList<String> lecturaUsuarios = ManejoArchivos.LeeFichero("usuarios.txt");
         ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
         ArrayList<String> lecturaOperadores = ManejoArchivos.LeeFichero("operadores.txt");
@@ -49,17 +57,18 @@ public class Sistema_de_compra_tickets {
             String[] datos = lecturaUsuarios.get(i).split(",");
             String[] sepNomApe = datos[1].split(" ");
             int edad = Integer.parseInt(datos[2]);
-            
+            String cedula = datos[0],nombre = sepNomApe[0] ,apellido = sepNomApe[1], correo = datos[3], usuario = datos[4],contrasenia = datos[5];
+                    
             if (datos[6].equals(Perfil.S)){
  
                 int numClientes = lecturaClientes.size()-1;
                 int indice = 1;
                 while (indice <= numClientes){
                     String[] datosCliente = lecturaClientes.get(indice).split(",");
-                    if (datosCliente[0].equals(datos[0])){
+                    if (datosCliente[0].equals(cedula)){
                         int numTarjeta = Integer.parseInt(datosCliente[1]);
-                        usuarios.add(new Cliente(datos[0],sepNomApe[0],sepNomApe[1],edad,datos[3],datos[4],datos[5],numTarjeta));
-                        indice = numClientes + 1;
+                        usuarios.add(new Cliente(cedula,nombre,apellido,edad,correo,usuario,contrasenia,numTarjeta));
+                        indice = numClientes;
                     }
                     indice+=1;
                 }
@@ -70,10 +79,10 @@ public class Sistema_de_compra_tickets {
                 int indice = 1;
                 while (indice <= numOperadores){
                     String[] datosOperador = lecturaOperadores.get(indice).split(",");
-                    if (datosOperador[0].equals(datos[0])){
+                    if (datosOperador[0].equals(cedula)){
                         double sueldoOperador = Double.parseDouble(datosOperador[1]);
-                        usuarios.add(new Operador(datos[0],sepNomApe[0],sepNomApe[1],edad,datos[3],datos[4],datos[5],sueldoOperador));
-                        indice = numOperadores + 1;
+                        usuarios.add(new Operador(cedula,nombre,apellido,edad,correo,usuario,contrasenia,sueldoOperador));
+                        indice = numOperadores;
                     }
                     indice+=1;
                 }
@@ -84,16 +93,12 @@ public class Sistema_de_compra_tickets {
                 int indice = 1;
                 while (indice <= numVIP){
                     String[] datosClienteVIP = lecturaClientes.get(indice).split(",");
-                    if (datosClienteVIP[0].equals(datos[0])){
+                    if (datosClienteVIP[0].equals(cedula)){
+                        int numTarjeta = Integer.parseInt(datosClienteVIP[1]);
                         int millas = Integer.parseInt(datosClienteVIP[3]);
-                        if (datosClienteVIP[4].equals("GOLD PASS")){
-                            usuarios.add(new ClienteVIP(datos[0],sepNomApe[0],sepNomApe[1],edad,datos[3],datos[4],datos[5],Rango.GOLD_PASS,millas);
-                           
-                        }else if (datosClienteVIP[4].equals("PLATINUM PASS")){
-                            usuarios.add(new ClienteVIP(datos[0],sepNomApe[0],sepNomApe[1],edad,datos[3],datos[4],datos[5],Rango.PLATINUM_PASS,millas);
-                        }
+                        usuarios.add(new ClienteVIP(cedula,nombre,apellido,edad,correo,usuario,contrasenia,numTarjeta,Rango.valueOf(datosClienteVIP[4]),millas));
                         
-                        indice = numVIP + 1;
+                        indice = numVIP;
                     }
                     indice+=1;
                 }
@@ -102,19 +107,31 @@ public class Sistema_de_compra_tickets {
         }
     }
     
+    public void mostrarBienvenida(){
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++"+"\n");
+        System.out.printf("%35s\n","BIENVENIDO AL SISTEMA");
+        System.out.println("\n"+"+++++++++++++++++++++++++++++++++++++++++++++++++");
+    }
+    
     public void mostrarMenu(){
         
-        }
+    }
     
     public void verificarDatosCliente(){
         
     }
     
     public void iniciarSesion(){
-        
+
+        System.out.print("USUARIO: ");
+        String usuarioIngreso = sc.nextLine();
+        System.out.print("CONTRASEÑA: ");
+        String contraseñaIngreso = sc.nextLine();
     }
     
     public static void main(String[] args) {
         
+        Sistema_de_compra_tickets sistema = new Sistema_de_compra_tickets();
+        //sistema
     }
 }
