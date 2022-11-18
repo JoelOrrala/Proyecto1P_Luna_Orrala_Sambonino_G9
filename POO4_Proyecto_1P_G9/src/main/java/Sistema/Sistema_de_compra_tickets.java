@@ -58,8 +58,7 @@ public class Sistema_de_compra_tickets {
             String[] datos = lecturaUsuarios.get(i).split(",");
             String[] sepNomApe = datos[1].split(" ");
             int edad = Integer.parseInt(datos[2]);
-            String cedula = datos[0],nombre = sepNomApe[0] ,apellido = sepNomApe[1], correo = datos[3], usuario = datos[4],contrasenia = datos[5];
-            String perfil = datos[6];
+            String cedula = datos[0],nombre = sepNomApe[0] ,apellido = sepNomApe[1], correo = datos[3], usuario = datos[4],contrasenia = datos[5], perfil = datos[6];
             
             if (perfil.equals(String.valueOf(Perfil.S)) || perfil.equals(String.valueOf(Perfil.V))){
  
@@ -99,11 +98,62 @@ public class Sistema_de_compra_tickets {
         System.out.println("\n"+"+++++++++++++++++++++++++++++++++++++++++++++++++");
     }
     
-    public void mostrarMenu(){
-        
-        System.out.println("Bienvenido ");
-        System.out.println("1. Realizar pedido");
-        System.out.println("2. Salir");
+    public void mostrarMenu(Perfil p) {
+        if (p == Perfil.S || p == Perfil.V) {
+            System.out.println("1. Comprar tickets aéreos");
+            System.out.println("2. Consultar reservas");
+            System.out.println("3. Salir");
+            String entrada = "";
+            do {
+                System.out.print("Ingrese opcion:");
+                entrada = sc.nextLine();
+                switch (entrada) {
+                    case "1":
+
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+
+                    default:
+                        //la opción ingreada no esta dentro de las opciones del menú
+                        System.out.println("Opción inválida");
+                        break;
+
+                }
+            } while (!entrada.equals("3"));
+
+        } else {
+            String entrada = "";
+            do {
+                System.out.println("1. Consultar usuarios");
+                System.out.println("2. Consultar reservas");
+                System.out.println("3. Salir");
+                System.out.print("Ingrese opción: ");
+                entrada = sc.nextLine();
+                switch (entrada) {
+                    case "1":
+
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+
+                    default:
+                        //la opción ingreada no esta dentro de las opciones del menú
+                        System.out.println("Opción inválida");
+                        break;
+
+                }
+            } while (!entrada.equals("3"));
+        }
+
     }
     
 //    public void verificarDatosCliente(){
@@ -116,16 +166,21 @@ public class Sistema_de_compra_tickets {
         System.out.print("USUARIO: ");
         String usuarioIngreso = sc.nextLine();
         System.out.print("CONTRASEÑA: ");
-        String contraseñaIngreso = sc.nextLine();
-        int numUsuarios = usuarios.size();
-        System.out.println(usuarios);
-        System.out.println(numUsuarios);
-//        for (Usuario u : usuarios){
-//            if (usuarioIngreso.equals(u.getUsuario())){
-//                
-//            }
-//        }
+        String contraseniaIngreso = sc.nextLine();
+        int vueltas = 1;
+        for (Usuario u : usuarios){
+           
+            if (usuarioIngreso.equals(u.getUsuario()) && contraseniaIngreso.equals(u.getContrasenia())){
+                    Perfil PerUsuIng = u.getPerfil();
+                    mostrarMenu(PerUsuIng);
+            }
+            vueltas++;
+            
+        }
         
+        if(vueltas > usuarios.size()){
+                System.out.println("usuario o contraseña incorrectos");
+            }
         
     }
     

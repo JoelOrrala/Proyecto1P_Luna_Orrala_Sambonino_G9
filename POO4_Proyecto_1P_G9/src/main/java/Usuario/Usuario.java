@@ -80,6 +80,10 @@ public abstract class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+    
+    public Perfil getPerfil(){
+        return perfil;
+    }
 
     @Override
     public String toString() {
