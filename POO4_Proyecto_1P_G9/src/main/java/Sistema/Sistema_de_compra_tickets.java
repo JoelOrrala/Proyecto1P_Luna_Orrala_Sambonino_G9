@@ -53,62 +53,44 @@ public class Sistema_de_compra_tickets {
         ArrayList<String> lecturaOperadores = ManejoArchivos.LeeFichero("operadores.txt");
         
         int numUsuarios = lecturaUsuarios.size()-1;
+        
         for (int i = 1;i <= numUsuarios;i++){
             String[] datos = lecturaUsuarios.get(i).split(",");
             String[] sepNomApe = datos[1].split(" ");
             int edad = Integer.parseInt(datos[2]);
             String cedula = datos[0],nombre = sepNomApe[0] ,apellido = sepNomApe[1], correo = datos[3], usuario = datos[4],contrasenia = datos[5];
-                    
-            if (datos[6].equals(String.valueOf(Perfil.S))){
+            String perfil = datos[6];
+            
+            if (perfil.equals(String.valueOf(Perfil.S)) || perfil.equals(String.valueOf(Perfil.V))){
  
-                int numClientes = lecturaClientes.size()-1;
-                int indice = 1;
-                while (indice <= numClientes){
-                    String[] datosCliente = lecturaClientes.get(indice).split(",");
+                for(String c: lecturaClientes){
+                    String[] datosCliente = c.split(",");
                     if (datosCliente[0].equals(cedula)){
                         String numTarjeta = datosCliente[1];
-                        usuarios.add(new Cliente(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.S,numTarjeta));
-                        indice = numClientes;
+                        int millas = Integer.parseInt(datosCliente[3]);
+                        if (perfil.equals(String.valueOf(Perfil.S))){
+                            usuarios.add(new Cliente(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.S,numTarjeta));
+                        } else if (perfil.equals(String.valueOf(Perfil.V))) {
+                            if (datosCliente[2].equals("GOLDEN PASS")) {
+                                usuarios.add(new ClienteVIP(cedula, nombre, apellido, edad, correo, usuario, contrasenia, Perfil.V, numTarjeta, Rango.GOLD_PASS, millas));
+                            } else if (datosCliente[2].equals("PLATINUM PASS")) {
+                                usuarios.add(new ClienteVIP(cedula, nombre, apellido, edad, correo, usuario, contrasenia, Perfil.V, numTarjeta, Rango.PLATINUM_PASS, millas));
+                            }
+                        }
                     }
-                    indice+=1;
                 }
                 
-            }else if(datos[6].equals(String.valueOf(Perfil.O))){
+            }else if(perfil.equals(String.valueOf(Perfil.O))){
               
-                int numOperadores = lecturaOperadores.size()-1;
-                int indice = 1;
-                while (indice <= numOperadores){
-                    String[] datosOperador = lecturaOperadores.get(indice).split(",");
+                for (String o: lecturaOperadores){
+                    String[] datosOperador = o.split(",");
                     if (datosOperador[0].equals(cedula)){
                         double sueldoOperador = Double.parseDouble(datosOperador[1]);
                         usuarios.add(new Operador(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.O,sueldoOperador));
-                        indice = numOperadores;
                     }
-                    indice+=1;
-                }
-                
-            }else if(datos[6].equals(String.valueOf(Perfil.V))){
-   
-                int numVIP = lecturaClientes.size()-1;
-                int indice = 1;
-                while (indice <= numVIP){
-                    String[] datosClienteVIP = lecturaClientes.get(indice).split(",");
-                    if (datosClienteVIP[0].equals(cedula)){
-                        String numTarjeta = datosClienteVIP[1];
-                        int millas = Integer.parseInt(datosClienteVIP[3]);
-                        if (datosClienteVIP[2].equals("GOLDEN PASS")){
-                            usuarios.add(new ClienteVIP(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.V,numTarjeta,Rango.GOLD_PASS,millas));
-                        }else if (datosClienteVIP[2].equals("PLATINUM PASS")){
-                            usuarios.add(new ClienteVIP(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.V,numTarjeta,Rango.PLATINUM_PASS,millas));
-                        }
-                        
-                        indice = numVIP;
-                    }
-                    indice+=1;
                 }
             }
-            
-        }
+        }  
     }
     
     public static void mostrarBienvenida(){
@@ -119,6 +101,9 @@ public class Sistema_de_compra_tickets {
     
     public void mostrarMenu(){
         
+        System.out.println("Bienvenido ");
+        System.out.println("1. Realizar pedido");
+        System.out.println("2. Salir");
     }
     
 //    public void verificarDatosCliente(){
@@ -132,8 +117,15 @@ public class Sistema_de_compra_tickets {
         String usuarioIngreso = sc.nextLine();
         System.out.print("CONTRASEÑA: ");
         String contraseñaIngreso = sc.nextLine();
-        
+        int numUsuarios = usuarios.size();
         System.out.println(usuarios);
+        System.out.println(numUsuarios);
+//        for (Usuario u : usuarios){
+//            if (usuarioIngreso.equals(u.getUsuario())){
+//                
+//            }
+//        }
+        
         
     }
     
