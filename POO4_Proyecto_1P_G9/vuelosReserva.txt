@@ -1,0 +1,1 @@
+codigoVueloReserva,codigoVuelo,tipo,tarifa,asiento

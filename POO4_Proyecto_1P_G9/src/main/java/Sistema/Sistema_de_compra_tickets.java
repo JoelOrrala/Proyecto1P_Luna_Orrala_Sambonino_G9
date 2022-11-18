@@ -98,8 +98,8 @@ public class Sistema_de_compra_tickets {
         System.out.println("\n"+"+++++++++++++++++++++++++++++++++++++++++++++++++");
     }
     
-    public void mostrarMenu(Perfil p) {
-        if (p == Perfil.S || p == Perfil.V) {
+    public void mostrarMenu(Usuario u) {
+        if (u.getPerfil() == Perfil.S || u.getPerfil() == Perfil.V) {
             System.out.println("1. Comprar tickets aéreos");
             System.out.println("2. Consultar reservas");
             System.out.println("3. Salir");
@@ -171,8 +171,7 @@ public class Sistema_de_compra_tickets {
         for (Usuario u : usuarios){
            
             if (usuarioIngreso.equals(u.getUsuario()) && contraseniaIngreso.equals(u.getContrasenia())){
-                    Perfil PerUsuIng = u.getPerfil();
-                    mostrarMenu(PerUsuIng);
+                    mostrarMenu(u);
             }
             vueltas++;
             

@@ -9,5 +9,5 @@ package ProcesoReserva;
  * @author joelorrala
  */
 public enum MetodoPago {
-    MILLAS,TARJETA_CREDITO
+    TC,M
 }

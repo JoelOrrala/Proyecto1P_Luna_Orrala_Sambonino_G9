@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ProcesoReserva;
+import SeleccionVuelo.vueloReservado;
 import java.util.ArrayList;
-import SeleccionVuelo.*;
 import Usuario.Cliente;
 /**
  *
@@ -12,7 +12,7 @@ import Usuario.Cliente;
  */
 public class Reserva {
     private String codigo;
-    private ArrayList<vueloReservado> vuelos;
+    private ArrayList<vueloReservado> listaVuelos;
     private String fechaReserva;
     private Cliente cliente;
     
@@ -24,12 +24,12 @@ public class Reserva {
         this.codigo = codigo;
     }
     
-    public ArrayList<vueloReservado> getVuelos(){
-        return vuelos;
+    public ArrayList<vueloReservado> getListaVuelos(){
+        return listaVuelos;
     }
     
-    public void setVueloReservado(ArrayList<vueloReservado> vuelos){
-        this.vuelos = vuelos;
+    public void setListaVuelos(ArrayList<vueloReservado> listaVuelos){
+        this.listaVuelos = listaVuelos;
     }
     
     public String getFechaReserva(){
@@ -48,7 +48,7 @@ public class Reserva {
         this.cliente = cliente;
     }
     
-    public void consultarReserva(){
+    public void consultarReserva(Cliente c){
         
     }
 }
