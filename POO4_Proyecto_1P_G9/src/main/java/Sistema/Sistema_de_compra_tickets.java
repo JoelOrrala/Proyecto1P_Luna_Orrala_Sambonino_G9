@@ -35,9 +35,9 @@ public class Sistema_de_compra_tickets {
         return usuarios;
     }
     
-    public void setUsuarios(ArrayList<Usuario> usuarios){
-        this.usuarios = usuarios;
-    }
+//    public void setUsuarios(ArrayList<Usuario> usuarios){
+//        this.usuarios = usuarios;
+//    }
     
     public ArrayList<Reserva> getReservas(){
         return reservas;
@@ -59,21 +59,21 @@ public class Sistema_de_compra_tickets {
             int edad = Integer.parseInt(datos[2]);
             String cedula = datos[0],nombre = sepNomApe[0] ,apellido = sepNomApe[1], correo = datos[3], usuario = datos[4],contrasenia = datos[5];
                     
-            if (datos[6].equals(Perfil.S)){
+            if (datos[6].equals(String.valueOf(Perfil.S))){
  
                 int numClientes = lecturaClientes.size()-1;
                 int indice = 1;
                 while (indice <= numClientes){
                     String[] datosCliente = lecturaClientes.get(indice).split(",");
                     if (datosCliente[0].equals(cedula)){
-                        int numTarjeta = Integer.parseInt(datosCliente[1]);
-                        usuarios.add(new Cliente(cedula,nombre,apellido,edad,correo,usuario,contrasenia,numTarjeta));
+                        String numTarjeta = datosCliente[1];
+                        usuarios.add(new Cliente(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.S,numTarjeta));
                         indice = numClientes;
                     }
                     indice+=1;
                 }
                 
-            }else if(datos[6].equals(Perfil.O)){
+            }else if(datos[6].equals(String.valueOf(Perfil.O))){
               
                 int numOperadores = lecturaOperadores.size()-1;
                 int indice = 1;
@@ -81,22 +81,26 @@ public class Sistema_de_compra_tickets {
                     String[] datosOperador = lecturaOperadores.get(indice).split(",");
                     if (datosOperador[0].equals(cedula)){
                         double sueldoOperador = Double.parseDouble(datosOperador[1]);
-                        usuarios.add(new Operador(cedula,nombre,apellido,edad,correo,usuario,contrasenia,sueldoOperador));
+                        usuarios.add(new Operador(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.O,sueldoOperador));
                         indice = numOperadores;
                     }
                     indice+=1;
                 }
                 
-            }else if(datos[6].equals(Perfil.V)){
+            }else if(datos[6].equals(String.valueOf(Perfil.V))){
    
                 int numVIP = lecturaClientes.size()-1;
                 int indice = 1;
                 while (indice <= numVIP){
                     String[] datosClienteVIP = lecturaClientes.get(indice).split(",");
                     if (datosClienteVIP[0].equals(cedula)){
-                        int numTarjeta = Integer.parseInt(datosClienteVIP[1]);
+                        String numTarjeta = datosClienteVIP[1];
                         int millas = Integer.parseInt(datosClienteVIP[3]);
-                        usuarios.add(new ClienteVIP(cedula,nombre,apellido,edad,correo,usuario,contrasenia,numTarjeta,Rango.valueOf(datosClienteVIP[4]),millas));
+                        if (datosClienteVIP[2].equals("GOLDEN PASS")){
+                            usuarios.add(new ClienteVIP(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.V,numTarjeta,Rango.GOLD_PASS,millas));
+                        }else if (datosClienteVIP[2].equals("PLATINUM PASS")){
+                            usuarios.add(new ClienteVIP(cedula,nombre,apellido,edad,correo,usuario,contrasenia,Perfil.V,numTarjeta,Rango.PLATINUM_PASS,millas));
+                        }
                         
                         indice = numVIP;
                     }
@@ -107,7 +111,7 @@ public class Sistema_de_compra_tickets {
         }
     }
     
-    public void mostrarBienvenida(){
+    public static void mostrarBienvenida(){
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++"+"\n");
         System.out.printf("%35s\n","BIENVENIDO AL SISTEMA");
         System.out.println("\n"+"+++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -117,21 +121,26 @@ public class Sistema_de_compra_tickets {
         
     }
     
-    public void verificarDatosCliente(){
-        
-    }
+//    public void verificarDatosCliente(){
+//        
+//    }
     
     public void iniciarSesion(){
-
+        GenerarUsuarios();
+        mostrarBienvenida();
         System.out.print("USUARIO: ");
         String usuarioIngreso = sc.nextLine();
         System.out.print("CONTRASEÑA: ");
         String contraseñaIngreso = sc.nextLine();
+        
+        System.out.println(usuarios);
+        
     }
     
     public static void main(String[] args) {
         
         Sistema_de_compra_tickets sistema = new Sistema_de_compra_tickets();
-        //sistema
+        sistema.iniciarSesion();
+      
     }
 }

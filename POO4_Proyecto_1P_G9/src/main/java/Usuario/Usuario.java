@@ -13,7 +13,7 @@ public abstract class Usuario {
     protected String contrasenia;
     protected Perfil perfil;
 
-    public Usuario(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia) {
+    public Usuario(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -21,6 +21,7 @@ public abstract class Usuario {
         this.correo = correo;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
+        this.perfil = perfil;
     }
 
     

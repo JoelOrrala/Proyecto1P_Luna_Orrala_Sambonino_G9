@@ -6,8 +6,8 @@ package Usuario;
 public class Operador extends Usuario {
     double sueldo;
     
-    public Operador(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, double sueldo){
-        super(cedula,nombre,apellido,edad,correo,usuario,contrasenia);
+    public Operador(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, double sueldo){
+        super(cedula,nombre,apellido,edad,correo,usuario,contrasenia,perfil);
         this.sueldo=sueldo;
     }
     
