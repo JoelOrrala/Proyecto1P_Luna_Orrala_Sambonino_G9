@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ProcesoReserva;
-import java.util.Random;
+
+import static Funcion.Funcion.generarNumeroAleatorio;
+
 /**
  *
  * @author joelorrala
@@ -38,10 +40,10 @@ public class Pago {
     private String generarCodigoPago(){
         String codigo = "";
         for (int i = 1; i <= 4; i++){
-            Random generado = new Random();
-            int numero = generado.nextInt(10);
+            int numero = generarNumeroAleatorio(0,10);
             codigo += numero;
         }
         return codigo;
     }
+
 }

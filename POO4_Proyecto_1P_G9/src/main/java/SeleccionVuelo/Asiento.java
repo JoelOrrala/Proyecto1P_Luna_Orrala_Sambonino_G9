@@ -10,9 +10,11 @@ package SeleccionVuelo;
  */
 public class Asiento {
     private String numAsiento;
-    private char disponibilidad;
+    private Disponibilidad disponibilidad;
+    private String codigoAvion;
 
-    public Asiento(String numAsiento, char disponibilidad) {
+    public Asiento(String codigoAvion,String numAsiento, Disponibilidad disponibilidad) {
+        this.codigoAvion = codigoAvion;
         this.numAsiento = numAsiento;
         this.disponibilidad = disponibilidad;
     }
@@ -25,13 +27,22 @@ public class Asiento {
         this.numAsiento = numAsiento;
     }
 
-    public char getDisponibilidad() {
+    public Disponibilidad getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(char disponibilidad) {
+    public void setDisponibilidad(Disponibilidad disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
+ 
+    public String getCodigoAvion() {
+        return codigoAvion;
+    }
     
+    @Override
+    public String toString() {
+        return "Asiento{" + "código avión = " + codigoAvion + ", número asiento = " + numAsiento + ", disponibilidad = " + disponibilidad + '}';
+    }
+
     
 }

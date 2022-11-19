@@ -4,6 +4,7 @@
  */
 package SeleccionVuelo;
 import java.util.ArrayList;
+import manejoArchivos.ManejoArchivos;
 
 /**
  *
@@ -14,10 +15,10 @@ public class Avion {
     private int capacidad;
     private ArrayList<Asiento> listaAsiento;
 
-    public Avion(String codigo, int capacidad, ArrayList<Asiento> listaAsiento) {
+    public Avion(String codigo, int capacidad) {
         this.codigo = codigo;
         this.capacidad = capacidad;
-        this.listaAsiento = listaAsiento;
+        this.listaAsiento = cargarAsientos();
     }
 
     public String getCodigo() {
@@ -44,6 +45,20 @@ public class Avion {
         this.listaAsiento = listaAsiento;
     }
     
-    
-
+    public ArrayList<Asiento> cargarAsientos(){
+        ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
+        ArrayList<Asiento> listaAsiento = new ArrayList<>();
+        lecturaAsientos.remove(0);
+        for (String linea: lecturaAsientos){
+            String[] datosAsiento = linea.split(",");
+            String codigoAvion = datosAsiento[0],numAsiento = datosAsiento[1];
+            Disponibilidad dispo = Disponibilidad.valueOf(datosAsiento[2]);
+            if (codigoAvion.equals(this.codigo)){
+                listaAsiento.add(new Asiento(codigoAvion,numAsiento,dispo));
+            }
+        }
+  
+        return listaAsiento; 
+    }
+   
 }

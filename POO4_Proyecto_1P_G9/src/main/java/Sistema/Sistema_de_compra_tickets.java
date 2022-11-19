@@ -27,7 +27,7 @@ public class Sistema_de_compra_tickets {
  
     public Sistema_de_compra_tickets(){
         sc = new Scanner(System.in);
-        usuarios = new ArrayList<>(); 
+        usuarios = GenerarUsuarios(); 
         reservas = new ArrayList<>(); 
     }
     
@@ -47,15 +47,17 @@ public class Sistema_de_compra_tickets {
         this.reservas = reservas;
     }
     
-    public void GenerarUsuarios(){
+    public ArrayList<Usuario> GenerarUsuarios(){
+        ArrayList<Usuario> usuarios = new ArrayList<>(); 
         ArrayList<String> lecturaUsuarios = ManejoArchivos.LeeFichero("usuarios.txt");
         ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
         ArrayList<String> lecturaOperadores = ManejoArchivos.LeeFichero("operadores.txt");
-        
-        int numUsuarios = lecturaUsuarios.size()-1;
-        
-        for (int i = 1;i <= numUsuarios;i++){
-            String[] datos = lecturaUsuarios.get(i).split(",");
+        lecturaUsuarios.remove(0);
+        lecturaClientes.remove(0);
+        lecturaOperadores.remove(0);
+     
+        for (String linea: lecturaUsuarios){
+            String[] datos = linea.split(",");
             String[] sepNomApe = datos[1].split(" ");
             int edad = Integer.parseInt(datos[2]);
             String cedula = datos[0],nombre = sepNomApe[0] ,apellido = sepNomApe[1], correo = datos[3], usuario = datos[4],contrasenia = datos[5], perfil = datos[6];
@@ -89,7 +91,8 @@ public class Sistema_de_compra_tickets {
                     }
                 }
             }
-        }  
+        }
+        return usuarios;
     }
     
     public static void mostrarBienvenida(){
@@ -161,7 +164,6 @@ public class Sistema_de_compra_tickets {
 //    }
     
     public void iniciarSesion(){
-        GenerarUsuarios();
         mostrarBienvenida();
         System.out.print("USUARIO: ");
         String usuarioIngreso = sc.nextLine();
