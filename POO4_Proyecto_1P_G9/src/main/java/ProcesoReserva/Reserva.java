@@ -11,17 +11,22 @@ import Usuario.Cliente;
  * @author joelorrala
  */
 public class Reserva {
+    private static final char[] letras = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
+        'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
     private String codigo;
     private ArrayList<vueloReservado> listaVuelos;
     private String fechaReserva;
     private Cliente cliente;
     
-    public String getCodigo(){
-        return codigo;
+    public Reserva(ArrayList<vueloReservado> listaVuelos,String fechaReserva,Cliente cliente){
+        this.codigo = generarCodigoReserva();
+        this.listaVuelos = listaVuelos;
+        this.fechaReserva = fechaReserva;
+        this.cliente = cliente;
     }
     
-    public void setCodigo(String codigo){
-        this.codigo = codigo;
+    public String getCodigo(){
+        return codigo;
     }
     
     public ArrayList<vueloReservado> getListaVuelos(){
@@ -48,7 +53,17 @@ public class Reserva {
         this.cliente = cliente;
     }
     
+    private String generarCodigoReserva(){
+        String codigo = ""; 
+        for (int i = 1; i <= 5; i++){
+            int indice = (int) (Math.random() * letras.length);
+            codigo += letras[indice];
+        }
+        return codigo;
+    }
+    
     public void consultarReserva(Cliente c){
         
     }
+    
 }

@@ -17,7 +17,7 @@ import manejoArchivos.ManejoArchivos;
 
 /**
  *
- * @author Giovanni
+ * @author joelorrala
  */
 public class Sistema_de_compra_tickets {
     
