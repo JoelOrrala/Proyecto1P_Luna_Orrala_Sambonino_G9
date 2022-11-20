@@ -4,8 +4,8 @@
  */
 
 package Sistema;
-import ProcesoReserva.Rango;
-import ProcesoReserva.Reserva;
+import Reservas.Rango;
+import Reservas.Reserva;
 import Usuario.Cliente;
 import Usuario.ClienteVIP;
 import Usuario.Operador;
@@ -108,17 +108,31 @@ public class Sistema_de_compra_tickets {
             System.out.println("3. Salir");
             String entrada = "";
             do {
-                System.out.print("Ingrese opcion:");
+                System.out.print("Ingrese opción:");
                 entrada = sc.nextLine();
                 switch (entrada) {
                     case "1":
-
+                        if (u.getPerfil() == Perfil.S) {
+                            Cliente c = (Cliente) u;
+                            c.comprarTicket();
+                        } else {
+                            ClienteVIP cvip = (ClienteVIP) u;
+                            cvip.comprarTicket();
+                        }
                         break;
                     case "2":
+                        if (u.getPerfil() == Perfil.S) {
+                            Cliente c = (Cliente) u;
+                            c.consultarReservas();
+                        } else {
+                            ClienteVIP cvip = (ClienteVIP) u;
+                            cvip.consultarReservas();
+                        }
 
                         break;
                     case "3":
-
+                        System.out.println("Gracias por usar nuestro programa");
+                        
                         break;
 
                     default:
@@ -129,7 +143,7 @@ public class Sistema_de_compra_tickets {
                 }
             } while (!entrada.equals("3"));
 
-        } else {
+        } else if (u.getPerfil() == Perfil.O){
             String entrada = "";
             do {
                 System.out.println("1. Consultar usuarios");
@@ -137,15 +151,21 @@ public class Sistema_de_compra_tickets {
                 System.out.println("3. Salir");
                 System.out.print("Ingrese opción: ");
                 entrada = sc.nextLine();
+                
+                Operador o = (Operador)u;
+                
                 switch (entrada) {
                     case "1":
-
+                        o.consultarUsuarios(usuarios);
+                        
                         break;
                     case "2":
+                        o.consultarReservas();
 
                         break;
                     case "3":
-
+                        System.out.println("Gracias por usar nuestro programa");
+                     
                         break;
 
                     default:
@@ -159,9 +179,13 @@ public class Sistema_de_compra_tickets {
 
     }
     
-//    public void verificarDatosCliente(){
-//        
-//    }
+    public static boolean verificarDatosCliente(Usuario u,String usuarioIngreso,String contraseniaIngreso){
+        if (usuarioIngreso.equals(u.getUsuario()) && contraseniaIngreso.equals(u.getContrasenia())){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     public void iniciarSesion(){
         mostrarBienvenida();
@@ -169,26 +193,25 @@ public class Sistema_de_compra_tickets {
         String usuarioIngreso = sc.nextLine();
         System.out.print("CONTRASEÑA: ");
         String contraseniaIngreso = sc.nextLine();
-        int vueltas = 1;
-        for (Usuario u : usuarios){
-           
-            if (usuarioIngreso.equals(u.getUsuario()) && contraseniaIngreso.equals(u.getContrasenia())){
-                    mostrarMenu(u);
+        boolean encontro = false;
+        int indice = 0;
+        while (encontro == false && indice<usuarios.size()) {
+            Usuario u = usuarios.get(indice);
+            encontro = verificarDatosCliente(u,usuarioIngreso,contraseniaIngreso);
+            if (encontro == true){
+                mostrarMenu(u);
             }
-            vueltas++;
-            
+            indice++;
         }
-        
-        if(vueltas > usuarios.size()){
-                System.out.println("usuario o contraseña incorrectos");
-            }
-        
+        if (encontro==false){
+            System.out.println("usuario o contraseña incorrectos");
+        }
     }
     
     public static void main(String[] args) {
-        
+
         Sistema_de_compra_tickets sistema = new Sistema_de_compra_tickets();
         sistema.iniciarSesion();
-      
+
     }
 }

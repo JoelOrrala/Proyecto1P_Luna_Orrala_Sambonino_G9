@@ -32,8 +32,12 @@ public class Cliente extends Usuario {
     }
     
     @Override
-    public void consultarReserva(){
+    public void consultarReservas(){
         
+    }
+    
+    public double pagoTicket(String numeroTarjeta){
+        return 0.0;
     }
     
 }

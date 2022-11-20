@@ -90,6 +90,6 @@ public abstract class Usuario {
         return "Usuario{" + "cedula = " + cedula + ", nombre = " + nombre + ", apellido = " + apellido + ", edad = " + edad + ", correo = " + correo + ", usuario = " + usuario + ", contrasenia = " + contrasenia + ", perfil = " + perfil + '}';
     }
     
-    public abstract void consultarReserva();
+    public abstract void consultarReservas();
     
 }

@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ProcesoReserva;
+package Reservas;
+import static Funcion.Funcion.generarLetraAleatoria;
 import SeleccionVuelo.vueloReservado;
 import java.util.ArrayList;
 import Usuario.Cliente;
@@ -11,8 +12,7 @@ import Usuario.Cliente;
  * @author joelorrala
  */
 public class Reserva {
-    private static final char[] letras = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
-        'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+ 
     private String codigo;
     private ArrayList<vueloReservado> listaVuelos;
     private String fechaReserva;
@@ -56,8 +56,7 @@ public class Reserva {
     private String generarCodigoReserva(){
         String codigo = ""; 
         for (int i = 1; i <= 5; i++){
-            int indice = (int) (Math.random() * letras.length);
-            codigo += letras[indice];
+            codigo += generarLetraAleatoria();
         }
         return codigo;
     }

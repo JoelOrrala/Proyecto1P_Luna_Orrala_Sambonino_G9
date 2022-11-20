@@ -1,6 +1,6 @@
 package Usuario;
 
-import ProcesoReserva.Rango;
+import Reservas.Rango;
 
 /**
  *
@@ -13,7 +13,37 @@ public class ClienteVIP extends Cliente{
     public ClienteVIP(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, String numeroTarjeta, Rango tipoVIP, int millas){
         super(cedula,nombre,apellido,edad,correo,usuario,contrasenia,perfil,numeroTarjeta);
         this.tipoVIP = tipoVIP;
-        this.millas = 1000;
+//        this.millas = 1000;
         this.millas = millas;
+    }
+    
+    public Rango getTipoVIP(){
+        return tipoVIP;
+    }
+    
+    public void setTipoVIP(Rango tipoVIP){
+        this.tipoVIP = tipoVIP;
+    }
+    
+    public int getMillas(){
+        return millas;
+    }
+    
+    public void setMillas(int millas){
+        this.millas = millas;
+    }
+    
+    @Override
+    public void consultarReservas(){
+        
+    }
+    
+    @Override
+    public double pagoTicket(String numeroTarjeta){
+        return 0.0;
+    }
+    
+    public double pagoTicket(int millas){
+        return 0.0;
     }
 }
