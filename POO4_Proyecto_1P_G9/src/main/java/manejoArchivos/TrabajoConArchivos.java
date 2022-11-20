@@ -23,9 +23,9 @@ public class TrabajoConArchivos {
 //        ManejoArchivos.EscribirArchivo("archivosalida.txt","Afios!");
 //        ManejoArchivos.EscribirArchivo("archivosalida.txt","NUevo!");
          ArrayList<String> lista = ManejoArchivos.LeeFichero("usuarios.txt");
-//         for (String linea: lista){
-//             System.out.println(linea);
-//         }
+         for (String linea: lista){
+             System.out.println(linea);
+         }
          Date today = Calendar.getInstance().getTime();
          System.out.println(today);
         
