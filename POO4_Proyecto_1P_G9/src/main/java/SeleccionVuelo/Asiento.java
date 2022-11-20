@@ -41,7 +41,7 @@ public class Asiento {
     
     @Override
     public String toString() {
-        return "Asiento{" + "código avión = " + codigoAvion + ", número asiento = " + numAsiento + ", disponibilidad = " + disponibilidad + '}';
+        return "Asiento:" + "código avión = " + codigoAvion + ", número asiento = " + numAsiento + ", disponibilidad = " + disponibilidad + '}';
     }
 
     

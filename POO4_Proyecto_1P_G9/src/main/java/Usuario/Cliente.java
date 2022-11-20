@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @author L.Luna
  */
 import SeleccionVuelo.*;
+import java.util.Random;
 import manejoArchivos.*;
 
 public class Cliente extends Usuario {
@@ -31,6 +32,8 @@ public class Cliente extends Usuario {
         lecturaVuelos.remove(0);
         ArrayList<String> lecturaItinerarios = ManejoArchivos.LeeFichero("itinerarios.txt");
         lecturaItinerarios.remove(0);
+        ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
+        lecturaAsientos.remove(0);
         Scanner sc = new Scanner(System.in);
         System.out.println("---ORIGEN-----");
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
@@ -79,6 +82,7 @@ public class Cliente extends Usuario {
 
         System.out.println("--------Vuelos Disponibles IDA-------------");
         int cont1 = 1;
+        ArrayList listaavionidad = new ArrayList();
         ArrayList listaprecios = new ArrayList();
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
@@ -88,6 +92,7 @@ public class Cliente extends Usuario {
                     if (inti[0].equals(invu[4])) {
                         System.out.println("---------" + cont1 + "------------");
                         System.out.println("CODIGO: " + invu[0]);
+                        listaavionidad.add(invu[0]);
                         System.out.println("HORA SALIDA : " + inti[3]);
                         System.out.println("HORA LLEGADA : " + inti[4]);
                         System.out.println("DURACION : " + inti[4]);
@@ -104,8 +109,9 @@ public class Cliente extends Usuario {
         System.out.print("Elije el vuelo de ida: ");
         int opida = sc.nextInt();
         sc.nextLine();
-        opida = opida-1;
+        opida = opida - 1;
         Double precioida = Double.valueOf(listaprecios.get(opida).toString());
+        String avionida = listaavionidad.get(opida).toString();
 
         System.out.println("TARIFAS: ");
         System.out.println("A. ECONOMY (+0)");
@@ -115,22 +121,23 @@ public class Cliente extends Usuario {
         System.out.print("Elija la Tarifa para tu vuelo: ");
         String opta = sc.nextLine();
 
-        double nuevoprecioida =0;
+        double nuevoprecioida = 0;
         if (opta.equals("A")) {
             nuevoprecioida = precioida;
-            
+
         }
         if (opta.equals("B")) {
             nuevoprecioida = precioida + 60;
-            
+
         }
         if (opta.equals("C")) {
             nuevoprecioida = precioida + 90;
-            
+
         }
 
         System.out.println("--------Vuelos Disponibles VUELTA-------------");
         int cont2 = 1;
+        ArrayList listaavionvuelta = new ArrayList();
         ArrayList listapreciosvuelta = new ArrayList();
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
@@ -140,13 +147,14 @@ public class Cliente extends Usuario {
                     if (inti[0].equals(invu[4])) {
                         System.out.println("---------" + cont2 + "------------");
                         System.out.println("CODIGO: " + invu[0]);
+                        listaavionvuelta.add(invu[5]);
                         System.out.println("HORA SALIDA : " + inti[3]);
                         System.out.println("HORA LLEGADA : " + inti[4]);
                         System.out.println("DURACION : " + inti[4]);
                         System.out.println("AVION: " + invu[1]);
                         System.out.println("PRECIO : " + invu[5]);
                         listapreciosvuelta.add(invu[5]);
-                        System.out.println("COSTO MILLAS : " + invu[6]);
+                        System.out.println("COSTO MILLAS : " + invu[6]); 
                         cont2++;
                     }
                 }
@@ -155,9 +163,10 @@ public class Cliente extends Usuario {
         System.out.print("Elije el vuelo de ida: ");
         int opvuelta = sc.nextInt();
         sc.nextLine();
-        opvuelta = opvuelta-1;
+        opvuelta = opvuelta - 1;
         Double preciovuelta = Double.valueOf(listapreciosvuelta.get(opvuelta).toString());
-
+        String avionvuelta = listaavionvuelta.get(opvuelta).toString();
+        
         System.out.println("TARIFAS: ");
         System.out.println("A. ECONOMY (+0)");
         System.out.println("B. Premium Economy (+60)");
@@ -169,19 +178,78 @@ public class Cliente extends Usuario {
         double nuevopreciovuelta = 0;
         if (opta1.equals("A")) {
             nuevopreciovuelta = preciovuelta;
-            
+
         }
         if (opta1.equals("B")) {
             nuevopreciovuelta = preciovuelta + 60;
-            
+
         }
         if (opta1.equals("C")) {
             nuevopreciovuelta = preciovuelta + 90;
-            
-        }
-        double subtotal = nuevopreciovuelta+ nuevoprecioida;
-        System.out.println("El subtotal de tu vuelo es : "+subtotal);
 
+        }
+        double subtotal = nuevopreciovuelta + nuevoprecioida;
+        System.out.println("El subtotal de tu vuelo es : " + subtotal);
+
+        System.out.print("Desea Continuar s/n: ");
+        String continuar = sc.nextLine();
+
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
+        System.out.printf("%35s\n", "PASO2");
+        System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        System.out.println("--------ASIENTOS-------");
+        //asiento ida
+        String asasig = "";
+        String disp = "N";
+        while (disp.equals("N")) {
+            Random r = new Random();
+            int valorDado = r.nextInt(lecturaAsientos.size());
+            for (int i = 0; i < valorDado; i++) {
+                String[] inti = lecturaItinerarios.get(i).split(",");
+                disp = inti[2];
+                asasig = inti[1];
+
+            }
+        }
+        //asientovuelta
+        String asasigv = "";
+        String dispv = "N";
+        while (dispv.equals("N")) {
+            Random r = new Random();
+            int valorDado = r.nextInt(lecturaAsientos.size());
+            for (int i = 0; i < valorDado; i++) {
+                String[] inti = lecturaItinerarios.get(i).split(",");
+                dispv = inti[2];
+                asasigv = inti[1];
+
+            }
+        }
+        System.out.println("Para tu vuelo de ida " + avionida + " se te ha asignado el asiento: "+asasig);
+        System.out.println("Para tu vuelo de retorno " + avionvuelta + " se te ha asignado el asiento: "+asasigv);
+        
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
+        System.out.printf("%35s\n", "PASO3");
+        System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
+        
+        System.out.println("-------------DATOS PASAJEROS------------");
+        System.out.println();
+        System.out.println("Fecha de nacimiento: ");
+        String fnac = sc.nextLine();
+        System.out.println("Genero (1.Masculino - 2. Femenino): ");
+        int gen = sc.nextInt();
+        sc.nextLine();
+        if (gen == 1){
+            String genero = "Masculino";
+        }
+        else{
+            String genero = "Femenino";
+        }
+        System.out.println("Nacionalidad: ");
+        String nac = sc.nextLine();
+        System.out.println("Tipo de documento (1.cedula - 2. pasaporte): ");
+        int tp = sc.nextInt();
+        sc.nextLine();
     }
 
     @Override
