@@ -26,6 +26,14 @@ public class TrabajoConArchivos {
          for (String linea: lista){
              System.out.println(linea);
          }
+         ArrayList<String> listavuelos = ManejoArchivos.LeeFichero("vuelos.txt");
+         for (String linea: listavuelos){
+             System.out.println(linea);
+         }
+         ArrayList<String> listaaviones = ManejoArchivos.LeeFichero("aviones.txt");
+         for (String linea: listaaviones){
+             System.out.println(linea);
+         }
          Date today = Calendar.getInstance().getTime();
          System.out.println(today);
         

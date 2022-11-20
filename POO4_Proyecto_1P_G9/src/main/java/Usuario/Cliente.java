@@ -25,10 +25,23 @@ public class Cliente extends Usuario {
     public void comprarTicket(){
         ArrayList<String> lecturaIntinerarios =ManejoArchivos.LeeFichero("itinerarios.txt");
         lecturaIntinerarios.remove(0);
+        Scanner sc = new Scanner (System.in);
+        System.out.println("---ORIGEN-----");
         for (int i = 0; i < lecturaIntinerarios.size(); i++) {
             String[] inti = lecturaIntinerarios.get(i).split(",");
             System.out.println((i+1)+". "+inti[1]);
         }
+        System.out.println("Elige punto de Partida: ");
+        int pp = sc.nextInt();
+        sc.nextLine();
+        System.out.println("---DESTINO-----");
+        for (int i = 0; i < lecturaIntinerarios.size(); i++) {
+            String[] inti = lecturaIntinerarios.get(i).split(",");
+            System.out.println((i+1)+". "+inti[1]);
+        }
+        System.out.println("Elige punto de LLegada: ");
+        int pll = sc.nextInt();
+        sc.nextLine();
     }
     
     @Override
