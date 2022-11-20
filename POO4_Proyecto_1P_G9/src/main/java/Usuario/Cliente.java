@@ -78,13 +78,14 @@ public class Cliente extends Usuario {
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
         
         System.out.println("--------Vuelos Disponibles IDA-------------");
-        
+        int cont1 = 1;
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
             if (po.equals(inti[1])) {                
                 for (int j = 0; j < lecturaVuelos.size(); j++) {
                     String[] invu = lecturaVuelos.get(j).split(",");
                     if (inti[0].equals(invu[4])) {
+                        System.out.println("---------"+cont1+"------------");
                         System.out.println("CODIGO: " + invu[0]);
                         System.out.println("HORA SALIDA : " + inti[3]);
                         System.out.println("HORA LLEGADA : " + inti[4]);
@@ -92,20 +93,42 @@ public class Cliente extends Usuario {
                         System.out.println("AVION: " + invu[1]);
                         System.out.println("PRECIO : " + invu[5]);
                         System.out.println("COSTO MILLAS : " + invu[6]);
+                        cont1++;
                     }
                 }
-            }
-//            
+            }          
         }
         
-        System.out.println("--------Vuelos Disponibles VUELTA-------------");
+        System.out.println("Elije el vuelo de ida: ");
+        int opida = sc.nextInt();
+        sc.nextLine();
         
+        System.out.println("TARIFAS: ");
+        System.out.println("A. ECONOMY (+0)");
+        System.out.println("B. Premium Economy (+60)");
+        System.out.println("C. Premium business (+90)");
+        
+        System.out.println("Elija la Tarifa para tu vuelo: ");
+        int opta = sc.nextInt();
+        sc.nextLine();
+        
+        for (int i = 0; i < pp; i++) {
+            String[] inti = lecturaVuelos.get(i).split(",");
+            fo = inti[2];
+        }
+        
+        int subt = ;
+        System.out.println("El subtotal de tu vuelo es : "+ subt);
+        
+        System.out.println("--------Vuelos Disponibles VUELTA-------------");
+        int cont2 = 1;
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
             if (pall.equals(inti[1])) {
                 for (int j = 0; j < lecturaVuelos.size(); j++) {
                     String[] invu = lecturaVuelos.get(j).split(",");
                     if (inti[0].equals(invu[4])) {
+                        System.out.println("---------"+cont2+"------------");
                         System.out.println("CODIGO: " + invu[0]);
                         System.out.println("HORA SALIDA : " + inti[3]);
                         System.out.println("HORA LLEGADA : " + inti[4]);
@@ -113,6 +136,7 @@ public class Cliente extends Usuario {
                         System.out.println("AVION: " + invu[1]);
                         System.out.println("PRECIO : " + invu[5]);
                         System.out.println("COSTO MILLAS : " + invu[6]);
+                        cont2++;
                     }
                 }
             }
