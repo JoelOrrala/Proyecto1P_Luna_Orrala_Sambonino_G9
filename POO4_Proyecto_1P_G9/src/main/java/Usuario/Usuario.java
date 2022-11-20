@@ -87,7 +87,9 @@ public abstract class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "cedula = " + cedula + ", nombre = " + nombre + ", apellido = " + apellido + ", edad = " + edad + ", correo = " + correo + ", usuario = " + usuario + ", contrasenia = " + contrasenia + ", perfil = " + perfil + '}';
+        return "Nombres = " + nombre + 
+               "Apellidos = " + apellido +
+               "Correo = " + correo ;
     }
     
     public abstract void consultarReservas();

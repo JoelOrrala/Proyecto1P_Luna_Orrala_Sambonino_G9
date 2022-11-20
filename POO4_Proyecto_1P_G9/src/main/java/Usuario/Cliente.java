@@ -9,6 +9,7 @@ import java.util.Scanner;
 import SeleccionVuelo.*;
 import java.util.Random;
 import manejoArchivos.*;
+import Sistema.*;
 
 public class Cliente extends Usuario {
 
@@ -233,7 +234,7 @@ public class Cliente extends Usuario {
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
         
         System.out.println("-------------DATOS PASAJEROS------------");
-        System.out.println();
+        
         System.out.println("Fecha de nacimiento: ");
         String fnac = sc.nextLine();
         System.out.println("Genero (1.Masculino - 2. Femenino): ");
@@ -250,6 +251,41 @@ public class Cliente extends Usuario {
         System.out.println("Tipo de documento (1.cedula - 2. pasaporte): ");
         int tp = sc.nextInt();
         sc.nextLine();
+        System.out.println("¿Desea guardar los datos del pasajero y continuar al pago (s/n)?");
+        String ans = sc.nextLine();
+        
+        System.out.println("Ha completado el paso 3");
+        
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
+        System.out.printf("%35s\n", "PASO4");
+        System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
+        
+        System.out.println("Descripcion: ");
+        System.out.println("");
+        System.out.println("Subtotal: "+subtotal);
+        System.out.println("Descuento: ");
+        System.out.println("Total: ");
+        System.out.println("IVA: ");
+        System.out.println("TOTAL A PAGAR: ");
+        System.out.println("");
+        System.out.println("Formas de pago:");
+        System.out.println("Tarjeta de credito");
+        System.out.println("Millas");
+        System.out.println("");
+        System.out.println("Elije tu forma de pago: ");
+        int fp = sc.nextInt();
+        sc.nextLine();
+        if (fp == 1){
+            System.out.println("Ingrese el numero de Tarjeta de credito: ");
+            String tc = sc.nextLine();
+            sc.nextLine();
+        }
+        else {
+            System.out.println("Estamos descontando sus millas.....");
+        }
+        System.out.println("¿Estas seguro de pagar el vuelo (s/n)?: ");
+        System.out.println("");
+        System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
     }
 
     @Override
