@@ -4,19 +4,24 @@
  */
 package SeleccionVuelo;
 
+import static Funcion.Funcion.generarNumeroAleatorio;
+import java.util.ArrayList;
+
 /**
  *
  * @author joelorrala
  */
 public class vueloReservado {
+    private Vuelo vueloSeleccionado;
     private TipoVuelo tipo;
     private Tarifa tarifa;
     private String asientoAsignado;
 
-    public vueloReservado(TipoVuelo tipo, Tarifa tarifa, String asientoAsignado) {
+    public vueloReservado(Vuelo vueloSeleccionado,TipoVuelo tipo, Tarifa tarifa) {
+        this.vueloSeleccionado = vueloSeleccionado;
         this.tipo = tipo;
         this.tarifa = tarifa;
-        this.asientoAsignado = asientoAsignado;
+        this.asientoAsignado = generarAsiento();
     }
 
     public TipoVuelo getTipo() {
@@ -42,7 +47,28 @@ public class vueloReservado {
     public void setAsientoAsignado(String asientoAsignado) {
         this.asientoAsignado = asientoAsignado;
     }
+
+    private String generarAsiento() {
+        ArrayList<Asiento> listaAsiento = vueloSeleccionado.getAvionSeleccionado().getListaAsiento();
+        boolean disponible = false;
+        String asiento = "";
+        while (disponible == false) {
+            int indAleatorio = generarNumeroAleatorio(0, listaAsiento.size());
+            Asiento a = listaAsiento.get(indAleatorio);
+            if (a.getDisponibilidad() == Disponibilidad.S) {
+                asiento += a.getNumAsiento();
+                a.setDisponibilidad(Disponibilidad.N);
+                disponible = true;
+            }
+        }
+        return asiento;
+    }
     
-    
+//    public static void main(String[] args){
+//        Avion a = new Avion("Airbus A319",61);
+//        Vuelo v = new Vuelo(a,"LA1437",482.89,new Itinerario(),"1/11/2022","1/11/2022");
+//        vueloReservado vr = new vueloReservado(v,TipoVuelo.IDA,Tarifa.ECONOMY);
+//        System.out.println(vr.generarAsiento());
+//    }
     
 }

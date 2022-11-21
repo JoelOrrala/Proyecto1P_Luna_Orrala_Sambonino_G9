@@ -31,4 +31,5 @@ public class Funcion {
         char letraAleatoria = letras[indice];
         return letraAleatoria;
     }
+    
 }

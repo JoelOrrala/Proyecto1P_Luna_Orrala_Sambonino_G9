@@ -45,7 +45,7 @@ public class Avion {
         this.listaAsiento = listaAsiento;
     }
     
-    public ArrayList<Asiento> cargarAsientos(){
+    private ArrayList<Asiento> cargarAsientos(){
         ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
         ArrayList<Asiento> listaAsiento = new ArrayList<>();
         lecturaAsientos.remove(0);
