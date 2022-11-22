@@ -39,11 +39,11 @@ public class ClienteVIP extends Cliente{
     }
     
     @Override
-    public double pagoTicket(String numeroTarjeta){
-        return 0.0;
+    public void pagoTicket(String numeroTarjeta){
+        
     }
     
-    public double pagoTicket(int millas){
-        return 0.0;
+    public void pagoTicket(int millas){
+        
     }
 }

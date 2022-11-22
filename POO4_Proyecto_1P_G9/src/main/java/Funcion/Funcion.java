@@ -6,6 +6,7 @@ package Funcion;
 
 import java.util.ArrayList;
 import java.util.Random;
+import manejoArchivos.ManejoArchivos;
 
 /**
  *
@@ -31,5 +32,36 @@ public class Funcion {
         char letraAleatoria = letras[indice];
         return letraAleatoria;
     }
+  
+    public static ArrayList<String> obtenerFechas(String puntoOP) {
+        ArrayList<String> lecturaVuelos = ManejoArchivos.LeeFichero("vuelos.txt");
+        lecturaVuelos.remove(0);
+        ArrayList<String> lecturaItinerarios = ManejoArchivos.LeeFichero("itinerarios.txt");
+        lecturaItinerarios.remove(0);
+        
+        ArrayList<String> fechas = new ArrayList<>();
+        for (int i = 0; i < lecturaItinerarios.size(); i++) {
+            String[] lineaIte = lecturaItinerarios.get(i).split(",");
+            if (lineaIte[1].equals(puntoOP)) {
+                for (int j = 0; j < lecturaVuelos.size(); j++) {
+                    String[] lineaVue = lecturaVuelos.get(j).split(",");
+                    if (lineaVue[4].equals(lineaIte[0])){
+                        if (fechas.contains(lineaVue[2])==false){
+                            fechas.add(lineaVue[2]);
+                        
+                        }
+                    }
+                }
+            }
+        }
+        return fechas;
+
+    }
+    
+//    public static void main(String[] args){
+//        Funcion f = new Funcion();
+//        f.obtenerFechas("GUAYAQUIL");
+//    
+//    }
     
 }

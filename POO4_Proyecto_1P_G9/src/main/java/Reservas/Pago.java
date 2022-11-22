@@ -14,11 +14,13 @@ public class Pago {
     private String fechaPago;
     private String idPago;
     private MetodoPago metodoPago;
+    private Reserva reserva;
     
-    public Pago(String fechaPago,MetodoPago metodoPago){
+    public Pago(String fechaPago,MetodoPago metodoPago, Reserva reserva){
         this.idPago = generarCodigoPago();
         this.fechaPago = fechaPago;
         this.metodoPago = metodoPago;
+        this.reserva = reserva;
     }
     
     public String getFechaPago(){
@@ -35,6 +37,10 @@ public class Pago {
     
     public MetodoPago getMetodoPago(){
         return metodoPago;
+    }
+    
+    public Reserva getReserva(){
+        return reserva;
     }
     
     private String generarCodigoPago(){

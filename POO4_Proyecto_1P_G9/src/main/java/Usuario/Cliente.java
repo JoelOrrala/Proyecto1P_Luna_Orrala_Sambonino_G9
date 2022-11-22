@@ -1,5 +1,6 @@
 package Usuario;
 
+import static Funcion.Funcion.obtenerFechas;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -12,7 +13,7 @@ import manejoArchivos.*;
 import Sistema.*;
 
 public class Cliente extends Usuario {
-
+//public class Cliente {
     protected String numeroTarjeta;
 
     public Cliente(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, String numeroTarjeta) {
@@ -36,49 +37,56 @@ public class Cliente extends Usuario {
         ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
         lecturaAsientos.remove(0);
         Scanner sc = new Scanner(System.in);
+        
+        
+        ArrayList<String> origenes = new ArrayList<>();
         System.out.println("---ORIGEN-----");
+        int ind = 1;
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
-            System.out.println((i + 1) + ". " + inti[1]);
+            if (origenes.contains(inti[1])==false){
+                System.out.println(ind + ". " + inti[1]);
+                origenes.add(inti[1]);
+                ind++;
+            }
         }
+        
         System.out.print("Elige punto de Partida: ");
-        int pp = sc.nextInt();
+        int ppIngreso = sc.nextInt();
         sc.nextLine();
-        String fo = "";
-        String po = "";
-        for (int i = 0; i < pp; i++) {
-            String[] inti = lecturaVuelos.get(i).split(",");
-            fo = inti[2];
-        }
-        for (int i = 0; i < pp; i++) {
-            String[] inti = lecturaItinerarios.get(i).split(",");
-            po = inti[1];
-
-        }
+        
+        String puntoOrigen = origenes.get(ppIngreso-1);
+        
+        ArrayList<String> fechas1 = obtenerFechas(puntoOrigen);
+        String fsalida = fechas1.get(0);
 
         System.out.println("---DESTINO-----");
+        ArrayList<String> llegadas = new ArrayList<>();
+        ind = 1;
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
-            System.out.println((i + 1) + ". " + inti[1]);
+            if (llegadas.contains(inti[2]) == false) {
+                System.out.println(ind + ". " + inti[2]);
+                llegadas.add(inti[2]);
+                ind++;
+            }
         }
+
         System.out.print("Elige punto de LLegada: ");
         int pll = sc.nextInt();
         sc.nextLine();
-        String fll = "";
-        String pall = "";
-        for (int i = 0; i < pll; i++) {
-            String[] inti = lecturaVuelos.get(i).split(",");
-            fll = inti[2];
-        }
-        for (int i = 0; i < pll; i++) {
-            String[] inti = lecturaItinerarios.get(i).split(",");
-            pall = inti[1];
-        }
-        System.out.println("FECHA DE SALIDA: " + fo);
-        System.out.println("FECHA DE RETORNO: " + fll);
+        
+        String puntoLlegada = llegadas.get(pll-1);
+        
+        
+        ArrayList<String> fechas2 = obtenerFechas(puntoLlegada);
+        String fregreso = fechas2.get(0);
+        
+        System.out.println("FECHA DE SALIDA: "+fsalida);
+        System.out.println("FECHA DE RETORNO: "+fregreso);
 
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
-        System.out.printf("%35s\n", "PASO1");
+        System.out.printf("%30s\n", "PASO1");
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
 
         System.out.println("--------Vuelos Disponibles IDA-------------");
@@ -87,7 +95,7 @@ public class Cliente extends Usuario {
         ArrayList listaprecios = new ArrayList();
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
-            if (po.equals(inti[1])) {
+            if (puntoOrigen.equals(inti[1])) {
                 for (int j = 0; j < lecturaVuelos.size(); j++) {
                     String[] invu = lecturaVuelos.get(j).split(",");
                     if (inti[0].equals(invu[4])) {
@@ -142,7 +150,7 @@ public class Cliente extends Usuario {
         ArrayList listapreciosvuelta = new ArrayList();
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
-            if (pall.equals(inti[1])) {
+            if (puntoLlegada.equals(inti[1])) {
                 for (int j = 0; j < lecturaVuelos.size(); j++) {
                     String[] invu = lecturaVuelos.get(j).split(",");
                     if (inti[0].equals(invu[4])) {
@@ -161,6 +169,7 @@ public class Cliente extends Usuario {
                 }
             }
         }
+        
         System.out.print("Elije el vuelo de ida: ");
         int opvuelta = sc.nextInt();
         sc.nextLine();
@@ -177,15 +186,15 @@ public class Cliente extends Usuario {
         String opta1 = sc.nextLine();
 
         double nuevopreciovuelta = 0;
-        if (opta1.equals("A")) {
+        if (opta1.equalsIgnoreCase("A")) {
             nuevopreciovuelta = preciovuelta;
 
         }
-        if (opta1.equals("B")) {
+        if (opta1.equalsIgnoreCase("B")) {
             nuevopreciovuelta = preciovuelta + 60;
 
         }
-        if (opta1.equals("C")) {
+        if (opta1.equalsIgnoreCase("C")) {
             nuevopreciovuelta = preciovuelta + 90;
 
         }
@@ -201,6 +210,7 @@ public class Cliente extends Usuario {
 
         System.out.println("--------ASIENTOS-------");
         //asiento ida
+        
         String asasig = "";
         String disp = "N";
         while (disp.equals("N")) {
@@ -214,6 +224,7 @@ public class Cliente extends Usuario {
             }
         }
         //asientovuelta
+        
         String asasigv = "";
         String dispv = "N";
         while (dispv.equals("N")) {
@@ -290,11 +301,16 @@ public class Cliente extends Usuario {
 
     @Override
     public void consultarReservas() {
-
+        
     }
 
-    public double pagoTicket(String numeroTarjeta) {
-        return 0.0;
+    public void pagoTicket(String numeroTarjeta) {
+        System.out.println("");
     }
+    
+//    public static void main(String[] args) {
+//        Cliente c = new Cliente();
+//        c.comprarTicket();
+//    }
 
 }
