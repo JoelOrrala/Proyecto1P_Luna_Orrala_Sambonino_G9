@@ -224,7 +224,6 @@ public class Cliente extends Usuario {
             }
         }
         //asientovuelta
-        
         String asasigv = "";
         String dispv = "N";
         while (dispv.equals("N")) {
@@ -271,9 +270,19 @@ public class Cliente extends Usuario {
         System.out.printf("%35s\n", "PASO4");
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
         
+        ArrayList<String> lecturaUsuarios = ManejoArchivos.LeeFichero("usuarios.txt");
+        lecturaUsuarios.remove(0);
+        ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
+        lecturaUsuarios.remove(0);
+        
+        
+        
         System.out.println("Descripcion: ");
         System.out.println("");
         System.out.println("Subtotal: "+subtotal);
+        for (int i = 0; i < lecturaUsuarios.size(); i++) {
+            String[] listUsers = lecturaUsuarios.get(i).split(",");
+        }
         System.out.println("Descuento: ");
         System.out.println("Total: ");
         System.out.println("IVA: ");
