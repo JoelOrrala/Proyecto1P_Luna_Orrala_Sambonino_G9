@@ -8,9 +8,11 @@ import java.util.Scanner;
  * @author L.Luna
  */
 import SeleccionVuelo.*;
+import Reservas.*;
 import java.util.Random;
 import manejoArchivos.*;
 import Sistema.*;
+import java.util.Date;
 
 public class Cliente extends Usuario {
 //public class Cliente {
@@ -274,44 +276,45 @@ public class Cliente extends Usuario {
         
         System.out.println("Ha completado el paso 3");
         
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
-        System.out.printf("%35s\n", "PASO4");
-        System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
+        char continuarP = sc.nextLine().toLowerCase().charAt(0);
+        if (continuarP=='s'){
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
+            System.out.printf("%35s\n", "PASO4");
+            System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
 //        ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
 //        lecturaUsuarios.remove(0);
         
-        System.out.println("Descripcion: ");
-        System.out.println("");
-        System.out.println("Subtotal: "+subtotal);
-        System.out.println("Descuento: 0% (Cliente Estandar)" );
-        System.out.println("Total: "+subtotal);
-        double iva = (subtotal/100)*12;
-        System.out.println("IVA: 12%"+iva);
-        System.out.println("TOTAL A PAGAR: "+(subtotal+iva));
-        System.out.println("");
-        System.out.println("Formas de pago:");
-        System.out.println("1.Tarjeta de credito");
-        System.out.println("2.Millas");
-        System.out.println("");
-        int j = 0;
-        while (j==0){
-            System.out.println("Elije tu forma de pago: ");
-            int fp = sc.nextInt();
-            sc.nextLine();
-            if (fp == 1){
-                System.out.println("Ingrese el numero de Tarjeta de credito: ");
-                String tc = sc.nextLine();
+            System.out.println("Descripcion: ");
+            System.out.println("");
+            System.out.println("Subtotal: "+subtotal);
+            System.out.println("Descuento: 0% (Cliente Estandar)" );
+            System.out.println("Total: "+subtotal);
+            double iva = (subtotal/100)*12;
+            System.out.println("IVA: 12%"+iva);
+            System.out.println("TOTAL A PAGAR: "+(subtotal+iva));
+            System.out.println("");
+            System.out.println("Formas de pago:");
+            System.out.println("1.Tarjeta de credito");
+            System.out.println("2.Millas");
+            System.out.println("");
+            int j = 0;
+            while (j==0){
+                System.out.println("Elije tu forma de pago: ");
+                int fp = sc.nextInt();
                 sc.nextLine();
-                j=1;
+                if (fp == 1){
+                    System.out.println("Ingrese el numero de Tarjeta de credito: ");
+                    String tc = sc.nextLine();
+                    sc.nextLine();
+                    pagoTicket(tc);
+                    j=1;
+                }
+                else {
+                    System.out.println("Usted no puede pagar con millas .....");
+                }
             }
-            else {
-                System.out.println("Usted no puede pagar con millas .....");
-            }
-        }
-        System.out.println("¿Estas seguro de pagar el vuelo (s/n)?: ");
-        System.out.println("");
-        System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
     }
+        }
 
     @Override
     public void consultarReservas() {
@@ -319,7 +322,14 @@ public class Cliente extends Usuario {
     }
 
     public void pagoTicket(String numeroTarjeta) {
-        System.out.println("");
+        Date fechaRegistro = new Date();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("¿Estas seguro de pagar el vuelo (s/n)?: ");
+        char continuarPagoV = sc.nextLine().toLowerCase().charAt(0);
+        if (continuarPagoV=='s'){
+            System.out.println("");
+            System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
+        }
     }
     
 //    public static void main(String[] args) {
