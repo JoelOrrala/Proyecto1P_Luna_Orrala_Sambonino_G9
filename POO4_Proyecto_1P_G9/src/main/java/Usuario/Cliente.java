@@ -261,6 +261,14 @@ public class Cliente extends Usuario {
         System.out.println("Tipo de documento (1.cedula - 2. pasaporte): ");
         int tp = sc.nextInt();
         sc.nextLine();
+        if (tp==1){
+            System.out.println("Numero de documento: ");
+            String identif = sc.nextLine();
+                }
+        else if (tp==2){
+            System.out.println("Numero de documento: ");
+            String identif = sc.nextLine();
+        }
         System.out.println("¿Desea guardar los datos del pasajero y continuar al pago (s/n)?");
         String ans = sc.nextLine();
         
@@ -269,39 +277,36 @@ public class Cliente extends Usuario {
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
         System.out.printf("%35s\n", "PASO4");
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
-        
-        ArrayList<String> lecturaUsuarios = ManejoArchivos.LeeFichero("usuarios.txt");
-        lecturaUsuarios.remove(0);
-        ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
-        lecturaUsuarios.remove(0);
-        
-        
+//        ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
+//        lecturaUsuarios.remove(0);
         
         System.out.println("Descripcion: ");
         System.out.println("");
         System.out.println("Subtotal: "+subtotal);
-        for (int i = 0; i < lecturaUsuarios.size(); i++) {
-            String[] listUsers = lecturaUsuarios.get(i).split(",");
-        }
-        System.out.println("Descuento: ");
-        System.out.println("Total: ");
-        System.out.println("IVA: ");
-        System.out.println("TOTAL A PAGAR: ");
+        System.out.println("Descuento: 0% (Cliente Estandar)" );
+        System.out.println("Total: "+subtotal);
+        double iva = (subtotal/100)*12;
+        System.out.println("IVA: 12%"+iva);
+        System.out.println("TOTAL A PAGAR: "+(subtotal+iva));
         System.out.println("");
         System.out.println("Formas de pago:");
-        System.out.println("Tarjeta de credito");
-        System.out.println("Millas");
+        System.out.println("1.Tarjeta de credito");
+        System.out.println("2.Millas");
         System.out.println("");
-        System.out.println("Elije tu forma de pago: ");
-        int fp = sc.nextInt();
-        sc.nextLine();
-        if (fp == 1){
-            System.out.println("Ingrese el numero de Tarjeta de credito: ");
-            String tc = sc.nextLine();
+        int j = 0;
+        while (j==0){
+            System.out.println("Elije tu forma de pago: ");
+            int fp = sc.nextInt();
             sc.nextLine();
-        }
-        else {
-            System.out.println("Estamos descontando sus millas.....");
+            if (fp == 1){
+                System.out.println("Ingrese el numero de Tarjeta de credito: ");
+                String tc = sc.nextLine();
+                sc.nextLine();
+                j=1;
+            }
+            else {
+                System.out.println("Usted no puede pagar con millas .....");
+            }
         }
         System.out.println("¿Estas seguro de pagar el vuelo (s/n)?: ");
         System.out.println("");
