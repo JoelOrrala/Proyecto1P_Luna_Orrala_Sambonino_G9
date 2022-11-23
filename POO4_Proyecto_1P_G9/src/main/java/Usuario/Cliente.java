@@ -38,6 +38,8 @@ public class Cliente extends Usuario {
         lecturaItinerarios.remove(0);
         ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
         lecturaAsientos.remove(0);
+        ArrayList<String> lecturaAviones = ManejoArchivos.LeeFichero("aviones.txt");
+        lecturaAviones.remove(0);
         Scanner sc = new Scanner(System.in);
         
         
@@ -58,7 +60,7 @@ public class Cliente extends Usuario {
         sc.nextLine();
         
         String puntoOrigen = origenes.get(ppIngreso-1);
-        
+         
         ArrayList<String> fechas1 = obtenerFechas(puntoOrigen);
         String fsalida = fechas1.get(0);
 
@@ -95,6 +97,7 @@ public class Cliente extends Usuario {
         int cont1 = 1;
         ArrayList listaavionidad = new ArrayList();
         ArrayList listaprecios = new ArrayList();
+        ArrayList listaCodigoAvion = new ArrayList();
         for (int i = 0; i < lecturaItinerarios.size(); i++) {
             String[] inti = lecturaItinerarios.get(i).split(",");
             if (puntoOrigen.equals(inti[1])) {
@@ -108,6 +111,7 @@ public class Cliente extends Usuario {
                         System.out.println("HORA LLEGADA : " + inti[4]);
                         System.out.println("DURACION : " + inti[4]);
                         System.out.println("AVION: " + invu[1]);
+                        listaCodigoAvion.add(invu[1]);
                         System.out.println("PRECIO : " + invu[5]);
                         listaprecios.add(invu[5]);
                         System.out.println("COSTO MILLAS : " + invu[6]);
@@ -121,6 +125,21 @@ public class Cliente extends Usuario {
         int opida = sc.nextInt();
         sc.nextLine();
         opida = opida - 1;
+        for (String s:lecturaAviones){
+                String[] outboundPlane = s.split(",");
+                if (listaCodigoAvion.get(opida).equals(outboundPlane[0])){
+                    String codigo = (String) listaCodigoAvion.get(opida);
+                    int capacidad = Integer.parseInt(outboundPlane[1]);
+                    Avion avIda = new Avion(codigo,capacidad);
+                    for (String v: lecturaVuelos){
+                        String[] outboundFligth = v.split(",");
+                        if (listaavionidad.get(opida).equals(outboundFligth[0])){
+                            //Vuelo vueloIda = new Vuelo(avIda, outboundFligth[0], (double)listaprecios.get(5), Itinerario, outboundFligth[2], outboundFligth[3]);
+                        }
+                                
+                    }
+            }  
+        }
         Double precioida = Double.valueOf(listaprecios.get(opida).toString());
         String avionida = listaavionidad.get(opida).toString();
 
@@ -213,6 +232,7 @@ public class Cliente extends Usuario {
         System.out.println("--------ASIENTOS-------");
         //asiento ida
         
+        
         String asasig = "";
         String disp = "N";
         while (disp.equals("N")) {
@@ -221,10 +241,13 @@ public class Cliente extends Usuario {
             for (int i = 0; i < valorDado; i++) {
                 String[] inti = lecturaItinerarios.get(i).split(",");
                 disp = inti[2];
-                asasig = inti[1];
+                if (disp == "S"){
+                    asasig = inti[1];
+                }
 
             }
         }
+        
         //asientovuelta
         String asasigv = "";
         String dispv = "N";
