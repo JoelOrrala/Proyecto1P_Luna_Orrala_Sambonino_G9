@@ -1,6 +1,8 @@
 package Usuario;
 
+import SeleccionVuelo.Avion;
 import java.util.ArrayList;
+import manejoArchivos.ManejoArchivos;
 
 /**
  *
@@ -24,6 +26,23 @@ public class Operador extends Usuario {
     
     @Override
     public void consultarReservas(){
+        ArrayList<String> lecturaAviones = ManejoArchivos.LeeFichero("aviones.txt");
+        lecturaAviones.remove(0);
+        ArrayList<String> lecturaVuelos = ManejoArchivos.LeeFichero("vuelos.txt");
+        lecturaVuelos.remove(0);
+        ArrayList<String> lecturaVuelosReserva = ManejoArchivos.LeeFichero("vuelosReserva.txt");
+        lecturaVuelosReserva.remove(0);
+        
+        ArrayList<Avion> aviones = new ArrayList<>();
+        for (String linea : lecturaVuelos) {
+            String[] datosVuelo = linea.split(",");
+            String codigo = datosVuelo[0];
+            int capacidad = Integer.parseInt(datosVuelo[1]);
+            aviones.add(new Avion(codigo,capacidad));
+        }
+        
+        
+       
     }
     
     public void consultarUsuarios(ArrayList<Usuario> lista){

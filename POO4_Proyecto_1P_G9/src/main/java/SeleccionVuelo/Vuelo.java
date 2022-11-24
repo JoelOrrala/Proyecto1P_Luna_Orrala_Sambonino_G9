@@ -9,24 +9,24 @@ package SeleccionVuelo;
  * @author Giovanni
  */
 public class Vuelo {
-    private Avion avionSeleccionado;
+    private Avion avion;
     private String codigo;
     private double precio;
-    private Itinerario codigoItinerario;
+    private Itinerario Itinerario;
     private String fechaSalida;
     private String fechaLLegada;
 
-    public Vuelo(Avion avionSeleccionado,String codigo, double precio, Itinerario codigoItinerario, String fechaSalida, String fechaLLegada) {
-        this.avionSeleccionado = avionSeleccionado;
+    public Vuelo(Avion avion,String codigo, double precio, Itinerario codigoItinerario, String fechaSalida, String fechaLLegada) {
+        this.avion = avion;
         this.codigo = codigo;
         this.precio = precio;
-        this.codigoItinerario = codigoItinerario;
+        this.Itinerario = codigoItinerario;
         this.fechaSalida = fechaSalida;
         this.fechaLLegada = fechaLLegada;
     }
     
-    public Avion getAvionSeleccionado(){
-        return avionSeleccionado;
+    public Avion getAvion(){
+        return avion;
     }
 
     public String getCodigo() {
@@ -45,12 +45,12 @@ public class Vuelo {
         this.precio = precio;
     }
 
-    public Itinerario getCodigoItinerario() {
-        return codigoItinerario;
+    public Itinerario getItinerario() {
+        return Itinerario;
     }
 
-    public void setCodigoItinerario(Itinerario codigoItinerario) {
-        this.codigoItinerario = codigoItinerario;
+    public void setCodigoItinerario(Itinerario Itinerario) {
+        this.Itinerario = Itinerario;
     }
 
     public String getFechaSalida() {

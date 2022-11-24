@@ -4,9 +4,11 @@
  */
 package Reservas;
 import static Funcion.Funcion.generarLetraAleatoria;
+import SeleccionVuelo.Vuelo;
 import SeleccionVuelo.vueloReservado;
 import java.util.ArrayList;
 import Usuario.Cliente;
+import manejoArchivos.ManejoArchivos;
 /**                                                                                                                                                                                                                                                                                                                                                               
  *
  * @author joelorrala
@@ -61,8 +63,8 @@ public class Reserva {
         return codigo;
     }
     
-    public void consultarReserva(Cliente c){
-        
+    public void consultarReserva(){
+     
     }
     
 }
