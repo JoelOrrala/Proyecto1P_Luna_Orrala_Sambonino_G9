@@ -49,7 +49,7 @@ public class vueloReservado {
     }
 
     private String generarAsiento() {
-        ArrayList<Asiento> listaAsiento = vueloSeleccionado.getAvionSeleccionado().getListaAsiento();
+        ArrayList<Asiento> listaAsiento = vueloSeleccionado.getAvion().getListaAsiento();
         boolean disponible = false;
         String asiento = "";
         while (disponible == false) {
