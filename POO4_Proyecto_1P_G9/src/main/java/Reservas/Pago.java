@@ -5,6 +5,7 @@
 package Reservas;
 
 import static Funcion.Funcion.generarNumeroAleatorio;
+import manejoArchivos.ManejoArchivos;
 
 /**
  *
@@ -14,12 +15,14 @@ public class Pago {
     private String fechaPago;
     private String idPago;
     private MetodoPago metodoPago;
+    private double totalPagarFinal;
     private Reserva reserva;
     
-    public Pago(String fechaPago,MetodoPago metodoPago, Reserva reserva){
+    public Pago(String fechaPago,MetodoPago metodoPago,double totalPagarFinal,Reserva reserva){
         this.idPago = generarCodigoPago();
         this.fechaPago = fechaPago;
         this.metodoPago = metodoPago;
+        this.totalPagarFinal = totalPagarFinal;
         this.reserva = reserva;
     }
     
@@ -39,6 +42,10 @@ public class Pago {
         return metodoPago;
     }
     
+    public double getTotalPagarFinal(){
+        return totalPagarFinal;
+    }
+    
     public Reserva getReserva(){
         return reserva;
     }
@@ -53,6 +60,6 @@ public class Pago {
     }
     
     public void almacenarPago(){
-        
+        ManejoArchivos.EscribirArchivo("pagos.txt",idPago+","+reserva.getCodigo()+","+totalPagarFinal+","+metodoPago);
     }
 }

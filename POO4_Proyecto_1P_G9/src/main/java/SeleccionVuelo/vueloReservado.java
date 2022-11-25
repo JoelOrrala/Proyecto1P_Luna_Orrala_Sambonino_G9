@@ -6,22 +6,30 @@ package SeleccionVuelo;
 
 import static Funcion.Funcion.generarNumeroAleatorio;
 import java.util.ArrayList;
+import manejoArchivos.ManejoArchivos;
 
 /**
  *
  * @author joelorrala
  */
 public class vueloReservado {
+
+    private String codigoVR;
     private Vuelo vueloSeleccionado;
     private TipoVuelo tipo;
     private Tarifa tarifa;
     private String asientoAsignado;
 
-    public vueloReservado(Vuelo vueloSeleccionado,TipoVuelo tipo, Tarifa tarifa) {
+    public vueloReservado(Vuelo vueloSeleccionado, TipoVuelo tipo, Tarifa tarifa) {
+        this.codigoVR = generarCodigoVR();
         this.vueloSeleccionado = vueloSeleccionado;
         this.tipo = tipo;
         this.tarifa = tarifa;
-        this.asientoAsignado = generarAsiento();
+        this.asientoAsignado = asignarAsiento();
+    }
+    
+    public String getCodigoVR(){
+        return codigoVR;
     }
 
     public TipoVuelo getTipo() {
@@ -48,7 +56,7 @@ public class vueloReservado {
         this.asientoAsignado = asientoAsignado;
     }
 
-    private String generarAsiento() {
+    private String asignarAsiento() {
         ArrayList<Asiento> listaAsiento = vueloSeleccionado.getAvion().getListaAsiento();
         boolean disponible = false;
         String asiento = "";
@@ -63,6 +71,19 @@ public class vueloReservado {
         }
         return asiento;
     }
+    
+     private String generarCodigoVR(){
+        String codigo = "";
+        for (int i = 1; i <= 4; i++){
+            int numero = generarNumeroAleatorio(0,10);
+            codigo += numero;
+        }
+        return codigo;
+    }
+    
+     public void almacenarVR(){
+         ManejoArchivos.EscribirArchivo("vuelosReserva.txt",codigoVR+","+vueloSeleccionado.getCodigo()+","+tipo+","+tarifa+","+asientoAsignado);
+     }
     
 //    public static void main(String[] args){
 //        Avion a = new Avion("Airbus A319",61);
