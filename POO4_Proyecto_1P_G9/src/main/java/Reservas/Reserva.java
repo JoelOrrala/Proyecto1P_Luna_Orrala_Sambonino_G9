@@ -19,12 +19,14 @@ public class Reserva {
     private ArrayList<vueloReservado> listaVuelos;
     private String fechaReserva;
     private Cliente cliente;
+    private double valorPagar;
     
-    public Reserva(ArrayList<vueloReservado> listaVuelos,String fechaReserva,Cliente cliente){
+    public Reserva(ArrayList<vueloReservado> listaVuelos,String fechaReserva,Cliente cliente,double valorPagar){
         this.codigo = generarCodigoReserva();
         this.listaVuelos = listaVuelos;
         this.fechaReserva = fechaReserva;
         this.cliente = cliente;
+        this.valorPagar = valorPagar;
     }
     
     public String getCodigo(){
@@ -55,6 +57,10 @@ public class Reserva {
         this.cliente = cliente;
     }
     
+    public double getValorPagar(){
+        return valorPagar;
+    }
+    
     private String generarCodigoReserva(){
         String codigo = ""; 
         for (int i = 1; i <= 5; i++){
@@ -63,6 +69,12 @@ public class Reserva {
         return codigo;
     }
     
+    public void almacenarReserva() {
+        for (vueloReservado v: listaVuelos){
+            ManejoArchivos.EscribirArchivo("reservas.txt", codigo + "," + v.getVueloSeleccionado().getCodigo() + "," + cliente.getNombre() + " " + cliente.getApellido() + "," + fechaReserva + "," + valorPagar);
+        }
+    }
+   
     public void consultarReserva(){
      
     }

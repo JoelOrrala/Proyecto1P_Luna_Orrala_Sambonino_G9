@@ -31,6 +31,10 @@ public class vueloReservado {
     public String getCodigoVR(){
         return codigoVR;
     }
+    
+    public Vuelo getVueloSeleccionado(){
+        return vueloSeleccionado;
+    }
 
     public TipoVuelo getTipo() {
         return tipo;
