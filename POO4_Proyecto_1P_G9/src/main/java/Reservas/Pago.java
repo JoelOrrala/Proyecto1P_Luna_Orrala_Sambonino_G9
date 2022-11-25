@@ -51,5 +51,8 @@ public class Pago {
         }
         return codigo;
     }
-
+    
+    public void almacenarPago(){
+        
+    }
 }

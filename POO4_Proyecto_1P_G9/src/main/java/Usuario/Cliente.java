@@ -1,6 +1,6 @@
 package Usuario;
 
-import static Funcion.Funcion.obtenerFechas;
+import static Funcion.Funcion.obtenerFechasVuelos;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -60,7 +60,7 @@ public class Cliente extends Usuario {
 
         String puntoOrigen = origenes.get(ppIngreso - 1);
 
-        ArrayList<String> fechas1 = obtenerFechas(puntoOrigen);
+        ArrayList<String> fechas1 = obtenerFechasVuelos(puntoOrigen);
         String fsalida = fechas1.get(0);
 
         System.out.println("---DESTINO-----");
@@ -81,7 +81,7 @@ public class Cliente extends Usuario {
 
         String puntoLlegada = llegadas.get(pll - 1);
 
-        ArrayList<String> fechas2 = obtenerFechas(puntoLlegada);
+        ArrayList<String> fechas2 = obtenerFechasVuelos(puntoLlegada);
         String fregreso = fechas2.get(0);
 
         System.out.println("FECHA DE SALIDA: " + fsalida);

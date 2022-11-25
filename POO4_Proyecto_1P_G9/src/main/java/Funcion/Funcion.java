@@ -33,7 +33,7 @@ public class Funcion {
         return letraAleatoria;
     }
   
-    public static ArrayList<String> obtenerFechas(String puntoOP) {
+    public static ArrayList<String> obtenerFechasVuelos(String puntoOP) {
         ArrayList<String> lecturaVuelos = ManejoArchivos.LeeFichero("vuelos.txt");
         lecturaVuelos.remove(0);
         ArrayList<String> lecturaItinerarios = ManejoArchivos.LeeFichero("itinerarios.txt");
