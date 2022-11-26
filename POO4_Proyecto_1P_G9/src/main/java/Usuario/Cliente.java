@@ -373,6 +373,7 @@ public class Cliente extends Usuario {
         char continuarPagoV = sc.nextLine().toLowerCase().charAt(0);
         if (continuarPagoV=='s'){
             System.out.println("");
+            //vueloReservado vueloreservaIda = new vueloReservado(vuelo, TipoVuelo.IDA, Tarifa.ECONOMY)
             System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
         }
     }
