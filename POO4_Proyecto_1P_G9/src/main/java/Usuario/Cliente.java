@@ -123,7 +123,7 @@ public class Cliente extends Usuario {
         int opida = sc.nextInt();
         sc.nextLine();
         opida = opida - 1;
-        Vuelo vueloIda;
+        Vuelo vueloIda = null;
         for (int i = 0; i < lecturaAviones.size(); i++) {
             String[] outboundPlane = lecturaAviones.get(i).split(",");
             String [] itinerary = lecturaItinerarios.get(i).split(",");
@@ -156,16 +156,20 @@ public class Cliente extends Usuario {
         String opta = sc.nextLine();
 
         double nuevoprecioida = 0;
+        Tarifa tarifaIda = null;
         if (opta.equals("A")) {
             nuevoprecioida = precioida;
+            tarifaIda = Tarifa.ECONOMY;
 
         }
         if (opta.equals("B")) {
             nuevoprecioida = precioida + 60;
+            tarifaIda=Tarifa.PREMIUM_ECONOMY;
 
         }
         if (opta.equals("C")) {
             nuevoprecioida = precioida + 90;
+            tarifaIda = Tarifa.PREMIUM_BUSINESS;
 
         }
 
@@ -199,7 +203,7 @@ public class Cliente extends Usuario {
         int opvuelta = sc.nextInt();
         sc.nextLine();
         opvuelta = opvuelta - 1;
-        Vuelo vueloRegreso;
+        Vuelo vueloRegreso = null;
         for (int t = 0; t < lecturaAviones.size(); t++) {
             String[] returnPlane = lecturaAviones.get(t).split(",");
             String [] itinerary2 = lecturaItinerarios.get(t).split(",");
@@ -232,17 +236,19 @@ public class Cliente extends Usuario {
         String opta1 = sc.nextLine();
 
         double nuevopreciovuelta = 0;
+        Tarifa tarifaVuelta = null;
         if (opta1.equalsIgnoreCase("A")) {
             nuevopreciovuelta = preciovuelta;
+            tarifaVuelta = Tarifa.ECONOMY;
 
         }
         if (opta1.equalsIgnoreCase("B")) {
             nuevopreciovuelta = preciovuelta + 60;
-
+            tarifaVuelta = Tarifa.PREMIUM_ECONOMY;
         }
         if (opta1.equalsIgnoreCase("C")) {
             nuevopreciovuelta = preciovuelta + 90;
-
+            tarifaVuelta = Tarifa.PREMIUM_BUSINESS;
         }
         double subtotal = nuevopreciovuelta + nuevoprecioida;
         System.out.println("El subtotal de tu vuelo es : " + subtotal);
@@ -268,9 +274,11 @@ public class Cliente extends Usuario {
                 if (disp == "S") {
                     asasig = inti[1];
                 }
-
             }
         }
+        vueloReservado vueloReservadoIda = new vueloReservado(vueloIda, TipoVuelo.IDA, tarifaIda);
+        var asientoIda = vueloReservadoIda.getAsientoAsignado();
+        System.out.println("Para tu vuelo de IDA "+vueloReservadoIda.getCodigoVR()+" se le ha asignado el vuelo: "+asientoIda);
 
         //asientovuelta
         String asasigv = "";
@@ -282,9 +290,15 @@ public class Cliente extends Usuario {
                 String[] inti = lecturaItinerarios.get(k).split(",");
                 dispv = inti[2];
                 asasigv = inti[1];
-
             }
         }
+        vueloReservado vueloReservadoRegreso = new vueloReservado(vueloRegreso, TipoVuelo.VUELTA, tarifaVuelta);
+        var asientoVuelta = vueloReservadoRegreso.getAsientoAsignado();
+        System.out.println("Para tu vuelo de RETORNO "+vueloReservadoRegreso.getCodigoVR()+" se le ha asignado el vuelo: "+asientoVuelta);
+        ArrayList<vueloReservado> vuelosReservados = new ArrayList<>();
+        vuelosReservados.add(vueloReservadoIda);
+        vuelosReservados.add(vueloReservadoRegreso);
+        
         System.out.println("Para tu vuelo de ida " + avionida + " se te ha asignado el asiento: " + asasig);
         System.out.println("Para tu vuelo de retorno " + avionvuelta + " se te ha asignado el asiento: " + asasigv);
 
@@ -353,6 +367,8 @@ public class Cliente extends Usuario {
                     String tc = sc.nextLine();
                     sc.nextLine();
                     pagoTicket(tc);
+                    System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
+                    Reserva reservaTicket = new Reserva(vuelosReservados, fsalida, this, (subtotal + iva));
                     j = 1;
                 } else {
                     System.out.println("Usted no puede pagar con millas .....");
@@ -374,7 +390,6 @@ public class Cliente extends Usuario {
         if (continuarPagoV=='s'){
             System.out.println("");
             //vueloReservado vueloreservaIda = new vueloReservado(vuelo, TipoVuelo.IDA, Tarifa.ECONOMY)
-            System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
         }
     }
     

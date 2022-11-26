@@ -12,7 +12,7 @@ import manejoArchivos.ManejoArchivos;
  *
  * @author joelorrala
  */
-public class vueloReservado {
+public class vueloReservado{
 
     private String codigoVR;
     private Vuelo vueloSeleccionado;
