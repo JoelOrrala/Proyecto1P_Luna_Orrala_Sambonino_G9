@@ -143,6 +143,7 @@ public class Cliente extends Usuario {
                         }
             }   
         }
+        }
         Double precioida = Double.valueOf(listaprecios.get(opida).toString());
         String avionida = listaavionidad.get(opida).toString();
 
@@ -198,6 +199,27 @@ public class Cliente extends Usuario {
         int opvuelta = sc.nextInt();
         sc.nextLine();
         opvuelta = opvuelta - 1;
+        Vuelo vueloRegreso;
+        for (int t = 0; t < lecturaAviones.size(); t++) {
+            String[] returnPlane = lecturaAviones.get(t).split(",");
+            String [] itinerary2 = lecturaItinerarios.get(t).split(",");
+            if (listaCodigoAvion.get(opvuelta).equals(returnPlane[0])) {
+                String codigo2 = (String) listaCodigoAvion.get(opvuelta);
+                int capacidad2 = Integer.parseInt(returnPlane[1]);
+                Avion avRegreso = new Avion(codigo2, capacidad2);
+                for (String vue : lecturaVuelos) {
+                    String[] returnFligth = vue.split(",");
+                    if (listaavionidad.get(opvuelta).equals(returnFligth[0])) {
+                        String[] duration2 = itinerary2[5].split(":");
+                        String duracion2S = duration2[0]+"."+duration2[1];
+                        double duration2D = Double.parseDouble(duracion2S);
+                        Itinerario iti2 = new Itinerario(itinerary2[1],itinerary2[2],itinerary2[3],duration2D);
+                        Vuelo retFlight = new Vuelo(avRegreso, returnFligth[0], (double)listapreciosvuelta.get(5), iti2, returnFligth[2], returnFligth[3]);
+                        vueloRegreso = retFlight;
+                        }
+            }   
+        }
+        }
         Double preciovuelta = Double.valueOf(listapreciosvuelta.get(opvuelta).toString());
         String avionvuelta = listaavionvuelta.get(opvuelta).toString();
 
