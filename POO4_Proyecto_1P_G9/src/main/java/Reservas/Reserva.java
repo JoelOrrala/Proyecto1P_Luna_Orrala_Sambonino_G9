@@ -68,6 +68,9 @@ public class Reserva {
         }
         return codigo;
     }
+    public String getGenerarCodigoReserva(){
+        return generarCodigoReserva();
+    }
     
     public void almacenarReserva() {
         for (vueloReservado v: listaVuelos){

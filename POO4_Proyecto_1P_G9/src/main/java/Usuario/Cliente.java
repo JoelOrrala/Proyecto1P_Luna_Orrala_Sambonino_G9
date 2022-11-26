@@ -341,18 +341,46 @@ public class Cliente extends Usuario {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
             System.out.printf("%35s\n", "PASO4");
             System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
-//        ArrayList<String> lecturaClientes = ManejoArchivos.LeeFichero("clientes.txt");
-//        lecturaUsuarios.remove(0);
-
+            
+            double totalFinal = 0.00;
             System.out.println("Descripcion: ");
             System.out.println("");
             System.out.println("Subtotal: " + subtotal);
-            System.out.println("Descuento: 0% (Cliente Estandar)");
-            System.out.println("Total: " + subtotal);
             double iva = (subtotal / 100) * 12;
-            System.out.println("IVA: 12%" + iva);
-            System.out.println("TOTAL A PAGAR: " + (subtotal + iva));
-            System.out.println("");
+            if (!(this instanceof ClienteVIP) || this.getPerfil() == Perfil.S){
+                System.out.println("Descuento: 0% (Cliente Estandar)");
+                System.out.println("Descuento: 0% (Cliente Estandar)");
+                System.out.println("Total: " + subtotal);
+                System.out.println("IVA: 12%" + iva);
+                System.out.println("TOTAL A PAGAR: " + (subtotal + iva));
+                totalFinal = (subtotal + iva);
+                System.out.println("");
+            }
+            else if (this instanceof ClienteVIP || this.getPerfil() == Perfil.V){
+                ClienteVIP clientevip = (ClienteVIP)this;
+                if (clientevip.getTipoVIP() == Rango.GOLD_PASS){
+                    System.out.println("Descuento: 20% (cliente vip GOLDEN PASS)");
+                    System.out.println("Subtotal"+subtotal);
+                    double descuento = (subtotal/100)*20;
+                    double total = (subtotal-descuento);
+                    System.out.println("Total: " + total);
+                    System.out.println("IVA: 12%" + iva);
+                    System.out.println("TOTAL A PAGAR: " + (total + iva));
+                    totalFinal = (total + iva);
+                    System.out.println("");
+                }
+                else if (clientevip.getTipoVIP() == Rango.PLATINUM_PASS){
+                    System.out.println("Descuento: 30% (cliente vip PLATINUM PASS)");
+                    System.out.println("Subtotal"+subtotal);
+                    double descuento = (subtotal/100)*30;
+                    double total = (subtotal-descuento);
+                    System.out.println("Total: " + total);
+                    System.out.println("IVA: 12%" + iva);
+                    System.out.println("TOTAL A PAGAR: " + (total + iva));
+                    totalFinal = (total + iva);
+                    System.out.println("");
+                }
+            }
             System.out.println("Formas de pago:");
             System.out.println("1.Tarjeta de credito");
             System.out.println("2.Millas");
@@ -367,11 +395,19 @@ public class Cliente extends Usuario {
                     String tc = sc.nextLine();
                     sc.nextLine();
                     pagoTicket(tc);
-                    System.out.println("Has comprado tu vuelo. El codigo de reserva es: ");
-                    Reserva reservaTicket = new Reserva(vuelosReservados, fsalida, this, (subtotal + iva));
+                    Reserva reservationTicket = new Reserva(vuelosReservados, fsalida, this, (subtotal + iva));
+                    String reservaTicket = reservationTicket.getGenerarCodigoReserva();
+                    System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
+                    reservationTicket.almacenarReserva();
                     j = 1;
-                } else {
+                } else if (fp == 2){
+                    if (!(this instanceof ClienteVIP) || this.getPerfil() == Perfil.S){
                     System.out.println("Usted no puede pagar con millas .....");
+                    }
+                    else if (this instanceof ClienteVIP || this.getPerfil() == Perfil.V){
+                        ClienteVIP clientVIP = (ClienteVIP)this;
+                        clientVIP.pagoTicket(clientVIP.getMillas());
+                    }
                 }
             }
         }
@@ -389,7 +425,6 @@ public class Cliente extends Usuario {
         char continuarPagoV = sc.nextLine().toLowerCase().charAt(0);
         if (continuarPagoV=='s'){
             System.out.println("");
-            //vueloReservado vueloreservaIda = new vueloReservado(vuelo, TipoVuelo.IDA, Tarifa.ECONOMY)
         }
     }
     
