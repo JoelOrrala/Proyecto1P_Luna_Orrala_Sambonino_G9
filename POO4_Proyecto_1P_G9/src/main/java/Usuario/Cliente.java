@@ -123,8 +123,10 @@ public class Cliente extends Usuario {
         int opida = sc.nextInt();
         sc.nextLine();
         opida = opida - 1;
-        for (String s : lecturaAviones) {
-            String[] outboundPlane = s.split(",");
+        Vuelo vueloIda;
+        for (int i = 0; i < lecturaAviones.size(); i++) {
+            String[] outboundPlane = lecturaAviones.get(i).split(",");
+            String [] itinerary = lecturaItinerarios.get(i).split(",");
             if (listaCodigoAvion.get(opida).equals(outboundPlane[0])) {
                 String codigo = (String) listaCodigoAvion.get(opida);
                 int capacidad = Integer.parseInt(outboundPlane[1]);
@@ -132,11 +134,14 @@ public class Cliente extends Usuario {
                 for (String v : lecturaVuelos) {
                     String[] outboundFligth = v.split(",");
                     if (listaavionidad.get(opida).equals(outboundFligth[0])) {
-                        //Vuelo vueloIda = new Vuelo(avIda, outboundFligth[0], (double)listaprecios.get(5), Itinerario, outboundFligth[2], outboundFligth[3]);
-                    }
-
-                }
-            }
+                        String[] duration = itinerary[5].split(":");
+                        String duracionS = duration[0]+"."+duration[1];
+                        double durationD = Double.parseDouble(duracionS);
+                        Itinerario iti = new Itinerario(itinerary[1],itinerary[2],itinerary[3],durationD);
+                        Vuelo outFlight = new Vuelo(avIda, outboundFligth[0], (double)listaprecios.get(5), iti, outboundFligth[2], outboundFligth[3]);
+                        vueloIda = outFlight;
+                        }
+            }   
         }
         Double precioida = Double.valueOf(listaprecios.get(opida).toString());
         String avionida = listaavionidad.get(opida).toString();
@@ -167,8 +172,8 @@ public class Cliente extends Usuario {
         int cont2 = 1;
         ArrayList listaavionvuelta = new ArrayList();
         ArrayList listapreciosvuelta = new ArrayList();
-        for (int i = 0; i < lecturaItinerarios.size(); i++) {
-            String[] inti = lecturaItinerarios.get(i).split(",");
+        for (int p = 0; p < lecturaItinerarios.size(); p++) {
+            String[] inti = lecturaItinerarios.get(p).split(",");
             if (puntoLlegada.equals(inti[1])) {
                 for (int j = 0; j < lecturaVuelos.size(); j++) {
                     String[] invu = lecturaVuelos.get(j).split(",");
@@ -235,8 +240,8 @@ public class Cliente extends Usuario {
         while (disp.equals("N")) {
             Random r = new Random();
             int valorDado = r.nextInt(lecturaAsientos.size());
-            for (int i = 0; i < valorDado; i++) {
-                String[] inti = lecturaItinerarios.get(i).split(",");
+            for (int q = 0; q < valorDado; q++) {
+                String[] inti = lecturaItinerarios.get(q).split(",");
                 disp = inti[2];
                 if (disp == "S") {
                     asasig = inti[1];
@@ -251,8 +256,8 @@ public class Cliente extends Usuario {
         while (dispv.equals("N")) {
             Random r = new Random();
             int valorDado = r.nextInt(lecturaAsientos.size());
-            for (int i = 0; i < valorDado; i++) {
-                String[] inti = lecturaItinerarios.get(i).split(",");
+            for (int k = 0; k < valorDado; k++) {
+                String[] inti = lecturaItinerarios.get(k).split(",");
                 dispv = inti[2];
                 asasigv = inti[1];
 
