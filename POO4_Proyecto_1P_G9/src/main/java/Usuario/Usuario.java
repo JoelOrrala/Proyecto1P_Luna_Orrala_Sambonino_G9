@@ -1,4 +1,8 @@
 package Usuario;
+
+import SeleccionVuelo.vueloReservado;
+import java.util.ArrayList;
+
 /**
  *
  * @author L.Luna
@@ -87,11 +91,10 @@ public abstract class Usuario {
 
     @Override
     public String toString() {
-        return "Nombres = " + nombre + 
-               "Apellidos = " + apellido +
-               "Correo = " + correo ;
+        return "Nombres = " + nombre + apellido +
+                "Cedula = "+ cedula;
     }
     
-    public abstract void consultarReservas();
+    public abstract void consultarReservas(ArrayList<vueloReservado> vuelosReservados);
     
 }

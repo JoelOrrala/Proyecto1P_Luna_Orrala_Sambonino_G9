@@ -6,19 +6,20 @@ package Reservas;
 
 import static Funcion.Funcion.generarNumeroAleatorio;
 import manejoArchivos.ManejoArchivos;
+import java.util.Date;
 
 /**
  *
  * @author joelorrala
  */
 public class Pago {
-    private String fechaPago;
+    private Date fechaPago;
     private String idPago;
     private MetodoPago metodoPago;
     private double totalPagarFinal;
     private Reserva reserva;
     
-    public Pago(String fechaPago,MetodoPago metodoPago,double totalPagarFinal,Reserva reserva){
+    public Pago(Date fechaPago,MetodoPago metodoPago,double totalPagarFinal,Reserva reserva){
         this.idPago = generarCodigoPago();
         this.fechaPago = fechaPago;
         this.metodoPago = metodoPago;
@@ -26,11 +27,11 @@ public class Pago {
         this.reserva = reserva;
     }
     
-    public String getFechaPago(){
+    public Date getFechaPago(){
         return fechaPago;
     }
     
-    public void setFechaPago(String fechaPago){
+    public void setFechaPago(Date fechaPago){
         this.fechaPago = fechaPago;
     }
     

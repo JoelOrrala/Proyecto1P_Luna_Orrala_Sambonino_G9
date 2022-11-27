@@ -15,14 +15,16 @@ public class Vuelo {
     private Itinerario Itinerario;
     private String fechaSalida;
     private String fechaLLegada;
+    private int precioMillas;
 
-    public Vuelo(Avion avion,String codigo, double precio, Itinerario codigoItinerario, String fechaSalida, String fechaLLegada) {
+    public Vuelo(Avion avion,String codigo, double precio, Itinerario codigoItinerario, String fechaSalida, String fechaLLegada, int precioMillas) {
         this.avion = avion;
         this.codigo = codigo;
         this.precio = precio;
         this.Itinerario = codigoItinerario;
         this.fechaSalida = fechaSalida;
         this.fechaLLegada = fechaLLegada;
+        this.precioMillas = precioMillas;
     }
     
     public Avion getAvion(){
@@ -55,6 +57,14 @@ public class Vuelo {
 
     public String getFechaSalida() {
         return fechaSalida;
+    }
+
+    public int getPrecioMillas() {
+        return precioMillas;
+    }
+
+    public void setPrecioMillas(int precioMillas) {
+        this.precioMillas = precioMillas;
     }
 
     public void setFechaSalida(String fechaSalida) {

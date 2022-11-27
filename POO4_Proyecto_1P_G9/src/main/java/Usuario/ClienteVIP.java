@@ -1,6 +1,15 @@
 package Usuario;
 
+import Reservas.MetodoPago;
+import Reservas.Pago;
 import Reservas.Rango;
+import Reservas.Reserva;
+import SeleccionVuelo.Vuelo;
+import SeleccionVuelo.vueloReservado;
+import Usuario.Cliente;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Date;
 
 /**
  *
@@ -33,20 +42,37 @@ public class ClienteVIP extends Cliente{
         this.millas = millas;
     }
     
-    @Override
-    public void consultarReservas(){
+    public void consultarReservas(ArrayList<vueloReservado> vuelosReservados){
         
     }
-    
+     
     @Override
-    public void pagoTicket(String numeroTarjeta){
-        super.pagoTicket(numeroTarjeta);
+    public void pagoTicket(String numeroTarjeta, Reserva reserva, double totalxpagar){
+        super.pagoTicket(numeroTarjeta,reserva,totalxpagar);
     }
     
-    public void pagoTicket(int millas){
-        System.out.println("Total de millas: "+this.millas);
-        
-        
-        
+    public void pagoTicket(int millas, Reserva reserva, double total){
+    vueloReservado vueloIda= reserva.getListaVuelos().get(0);
+    int millasVueloIda = vueloIda.getVueloSeleccionado().getPrecioMillas();
+    vueloReservado vueloVuelta= reserva.getListaVuelos().get(1);
+    int millasVueloVuelta = vueloVuelta.getVueloSeleccionado().getPrecioMillas();
+    int totalmillas = millasVueloIda+millasVueloVuelta;
+    if (millas-totalmillas < 0){
+        System.out.println("No le alcanza las millas");
+        System.out.println("Debe pagar con tarjeta de credito: ");
+        System.out.println("Ingrese el numero de Tarjeta de credito:");
+        Scanner sc = new Scanner(System.in);
+        String tc = sc.nextLine();
+        this.pagoTicket(tc, reserva, total);
+    }
+    else if (millas-totalmillas >= 0){
+        Date fechaPago = new Date();
+        int resta = millas-totalmillas;
+        Pago pago = new Pago(fechaPago, MetodoPago.M, total, reserva);
+        pago.almacenarPago();
+    }
+    
+    
+
     }
 }
