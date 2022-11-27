@@ -35,10 +35,6 @@ public class Sistema_de_compra_tickets {
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
-
-//    public void setUsuarios(ArrayList<Usuario> usuarios){
-//        this.usuarios = usuarios;
-//    }
     public ArrayList<Reserva> getReservas() {
         return reservas;
     }

@@ -276,38 +276,12 @@ public class Cliente extends Usuario {
                 System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
 
                 System.out.println("--------ASIENTOS-------");
-//        //asiento ida
-//        String asasig = "";
-//        String disp = "N";
-//        while (disp.equals("N")) {
-//            Random r = new Random();
-//            int valorDado = r.nextInt(lecturaAsientos.size());
-//            for (int q = 0; q < valorDado; q++) {
-//                String[] inti = lecturaItinerarios.get(q).split(",");
-//                disp = inti[2];
-//                if (disp == "S") {
-//                    asasig = inti[1];
-//                }
-//            }
-//        }
                 //Asiento reservado de ida
                 vueloReservado vueloReservadoIda = new vueloReservado(vueloIda, TipoVuelo.IDA, tarifaIda);
                 vueloReservadoIda.almacenarVR();
                 var asientoIda = vueloReservadoIda.getAsientoAsignado();
                 System.out.println("Para tu vuelo de IDA " + vueloReservadoIda.getCodigoVR() + " se le ha asignado el vuelo: " + asientoIda);
 
-//        //asientovuelta
-//        String asasigv = "";
-//        String dispv = "N";
-//        while (dispv.equals("N")) {
-//            Random r = new Random();
-//            int valorDado = r.nextInt(lecturaAsientos.size());
-//            for (int k = 0; k < valorDado; k++) {
-//                String[] inti = lecturaItinerarios.get(k).split(",");
-//                dispv = inti[2];
-//                asasigv = inti[1];
-//            }
-//        }
                 //Asiento reservado de regreso
                 vueloReservado vueloReservadoRegreso = new vueloReservado(vueloRegreso, TipoVuelo.VUELTA, tarifaVuelta);
                 vueloReservadoRegreso.almacenarVR();
@@ -318,10 +292,7 @@ public class Cliente extends Usuario {
                 //Vuelos reservados
                 vuelosReservados.add(vueloReservadoIda);
                 vuelosReservados.add(vueloReservadoRegreso);
-////        
-////        System.out.println("Para tu vuelo de ida " + avionida + " se te ha asignado el asiento: " + asasig);
-////        System.out.println("Para tu vuelo de retorno " + avionvuelta + " se te ha asignado el asiento: " + asasigv);
-
+                
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
                 System.out.printf("%35s\n", "PASO3");
                 System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -349,7 +320,6 @@ public class Cliente extends Usuario {
                 int tp = sc.nextInt();
                 sc.nextLine();
                 if (tp == 1) {
-//            String identif = sc.nextLine();
                     System.out.println("Cedula: " + this.cedula);
                 } else if (tp == 2) {
                     System.out.print("Número de documento: ");
@@ -423,7 +393,7 @@ public class Cliente extends Usuario {
                                     pagoTicket(tc, reservationTicket, totalFinal);
                                     System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
                                     reservationTicket.almacenarReserva();
-                                   
+
                                 }
                                 j = 1;
                             } else if (fp == 2) {
@@ -439,9 +409,9 @@ public class Cliente extends Usuario {
                                         clientVIP.pagoTicket(clientVIP.getMillas(), reservationTicket, totalFinal);
                                         System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
                                         reservationTicket.almacenarReserva();
-                                    
+
                                     }
-                                        j = 1;
+                                    j = 1;
                                 }
                             }
                         }
@@ -462,6 +432,7 @@ public class Cliente extends Usuario {
         String horasale = null;
         String horallega = null;
         String avion = null;
+
         for (int h = 0; h < lecturaReservas.size(); h++) {
             String[] reservas = lecturaReservas.get(h).split(",");
             String nombres = reservas[2];
@@ -501,9 +472,4 @@ public class Cliente extends Usuario {
         Pago pago1 = new Pago(reserva.getFechaReserva(), MetodoPago.TC, totalxpagar + (totalxpagar * 0.10), reserva);
         pago1.almacenarPago();
     }
-
-//    public static void main(String[] args) {
-//        Cliente c = new Cliente();
-//        c.comprarTicket();
-//    }
 }
