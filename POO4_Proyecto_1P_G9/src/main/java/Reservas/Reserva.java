@@ -9,6 +9,7 @@ import SeleccionVuelo.vueloReservado;
 import java.util.ArrayList;
 import Usuario.Cliente;
 import manejoArchivos.ManejoArchivos;
+import java.util.Date;
 /**                                                                                                                                                                                                                                                                                                                                                               
  *
  * @author joelorrala
@@ -17,11 +18,11 @@ public class Reserva {
  
     private String codigo;
     private ArrayList<vueloReservado> listaVuelos;
-    private String fechaReserva;
+    private Date fechaReserva;
     private Cliente cliente;
     private double valorPagar;
     
-    public Reserva(ArrayList<vueloReservado> listaVuelos,String fechaReserva,Cliente cliente,double valorPagar){
+    public Reserva(ArrayList<vueloReservado> listaVuelos,Date fechaReserva,Cliente cliente,double valorPagar){
         this.codigo = generarCodigoReserva();
         this.listaVuelos = listaVuelos;
         this.fechaReserva = fechaReserva;
@@ -41,11 +42,11 @@ public class Reserva {
         this.listaVuelos = listaVuelos;
     }
     
-    public String getFechaReserva(){
+    public Date getFechaReserva(){
         return fechaReserva;
     }
     
-    public void setFechaReserva(String fechaReserva){
+    public void setFechaReserva(Date fechaReserva){
         this.fechaReserva = fechaReserva;
     }
     

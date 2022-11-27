@@ -6,6 +6,7 @@
 package Sistema;
 import Reservas.Rango;
 import Reservas.Reserva;
+import SeleccionVuelo.vueloReservado;
 import Usuario.Cliente;
 import Usuario.ClienteVIP;
 import Usuario.Operador;
@@ -123,10 +124,10 @@ public class Sistema_de_compra_tickets {
                     case "2":
                         if (u.getPerfil() == Perfil.S) {
                             Cliente c = (Cliente) u;
-                            c.consultarReservas();
+                            c.consultarReservas(ArrayList<vueloReservado> vuelosReservados);
                         } else {
                             ClienteVIP cvip = (ClienteVIP) u;
-                            cvip.consultarReservas();
+                            cvip.consultarReservas(ArrayList<vueloReservado> vuelosReservados);
                         }
 
                         break;

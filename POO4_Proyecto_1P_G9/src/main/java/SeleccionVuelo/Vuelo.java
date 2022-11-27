@@ -59,6 +59,14 @@ public class Vuelo {
         return fechaSalida;
     }
 
+    public int getPrecioMillas() {
+        return precioMillas;
+    }
+
+    public void setPrecioMillas(int precioMillas) {
+        this.precioMillas = precioMillas;
+    }
+
     public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
     }

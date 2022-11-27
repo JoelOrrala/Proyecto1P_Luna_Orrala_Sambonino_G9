@@ -25,7 +25,6 @@ public class Operador extends Usuario {
         this.sueldo = sueldo;
     }
     
-    @Override
     public void consultarReservas(){
      
         ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
