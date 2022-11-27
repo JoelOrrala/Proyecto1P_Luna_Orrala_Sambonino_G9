@@ -409,60 +409,79 @@ public class Cliente extends Usuario {
                     char continuarPagoV = sc.nextLine().toLowerCase().charAt(0);
                     if (continuarPagoV == 's') {
                         pagoTicket(tc, reservationTicket, totalFinal);
-                    System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
-                    reservationTicket.almacenarReserva();
-                    j = 1;
+                        System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
+                        reservationTicket.almacenarReserva();
+                        j = 1;
                     }
-                    } 
-                else if (fp == 2) {
-                        if (!(this instanceof ClienteVIP) || this.getPerfil() == Perfil.S) {
-                            System.out.println("Usted no puede pagar con millas .....");
-                        } else if (this instanceof ClienteVIP || this.getPerfil() == Perfil.V) {
-                            ClienteVIP clientVIP = (ClienteVIP) this;
-                            Reserva reservationTicket = new Reserva(vuelosReservados, fechaRegistro, this, (subtotal + iva));
-                            String reservaTicket = reservationTicket.getGenerarCodigoReserva();
-                            System.out.println("¿Estas seguro de pagar el vuelo (s/n)?: ");
-                            char continuarPagoV = sc.nextLine().toLowerCase().charAt(0);
-                            if (continuarPagoV == 's') {
-                                clientVIP.pagoTicket(clientVIP.getMillas(),reservationTicket,totalFinal);
-                                System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
-                                reservationTicket.almacenarReserva();
-                                j = 1;
-                            }   
+                } else if (fp == 2) {
+                    if (!(this instanceof ClienteVIP) || this.getPerfil() == Perfil.S) {
+                        System.out.println("Usted no puede pagar con millas .....");
+                    } else if (this instanceof ClienteVIP || this.getPerfil() == Perfil.V) {
+                        ClienteVIP clientVIP = (ClienteVIP) this;
+                        Reserva reservationTicket = new Reserva(vuelosReservados, fechaRegistro, this, (subtotal + iva));
+                        String reservaTicket = reservationTicket.getGenerarCodigoReserva();
+                        System.out.println("¿Estas seguro de pagar el vuelo (s/n)?: ");
+                        char continuarPagoV = sc.nextLine().toLowerCase().charAt(0);
+                        if (continuarPagoV == 's') {
+                            clientVIP.pagoTicket(clientVIP.getMillas(), reservationTicket, totalFinal);
+                            System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
+                            reservationTicket.almacenarReserva();
+                            j = 1;
                         }
                     }
                 }
             }
-
         }
-        public void consultarReservas(ArrayList<vueloReservado> vuelosReservados){
+
+    }
+
+    @Override
+    public void consultarReservas() {
         ArrayList<String> lecturaReservas = ManejoArchivos.LeeFichero("reservas.txt");
         lecturaReservas.remove(0);
-        vueloReservado avion = null;
-            for (int h = 0; h < lecturaReservas.size(); h++) {
-                String [] reservas = lecturaReservas.get(h).split(",");
-                String nombres = reservas.toString();
-                String vuelo = reservas[1];
-                String [] hora;
-                for (int i = 0; i < 1; i++) {
-                    avion = vuelosReservados.get(1);
+        ArrayList<String> lecturaVuelos = ManejoArchivos.LeeFichero("vuelos.txt");
+        lecturaVuelos.remove(0);
+        ArrayList<String> lecturaItinerarios = ManejoArchivos.LeeFichero("itinerarios.txt");
+        lecturaItinerarios.remove(0);
+        String horasale= null;
+        String horallega = null;
+        String avion = null;
+        for (int h = 0; h < lecturaReservas.size(); h++) {
+            String[] reservas = lecturaReservas.get(h).split(",");
+            String nombres = reservas[3];
+            String vuelo = reservas[1];
+            for (int i = 0; i < lecturaVuelos.size(); i++) {
+                String[] vuelos = lecturaVuelos.get(i).split(",");
+                String codvuelo = vuelos[0];
+                if (codvuelo.equals(vuelo)) {
+                    avion= vuelos[1];
+                    String itinerario = vuelos[4];
+                    for (int j = 0; j < lecturaItinerarios.size(); j++) {
+                        String [] itinerarios = lecturaItinerarios.get(j).split(",");
+                        String coditinerario = itinerarios[0];
+                        if (coditinerario.equals(itinerario)){
+                             horasale = itinerarios[3];
+                             horallega = itinerarios[4];
+                        }
+                    }
                 }
-                System.out.println(nombres);
-                System.out.println("Vuelo: "+vuelo);
-                System.out.println("Avion: "+avion);
-                Random aleatorio = new Random();
-                var aleat = aleatorio.nextInt(1, 11);
-                System.out.println("Puerta de embargue: "+aleat);
-                
             }
-
+            System.out.println("\n NOMBRES: "+nombres);
+            System.out.println("CEDULA: "+this.cedula);
+            System.out.println("VUELO: " + vuelo);
+            System.out.println("HORA SALIDA: "+horasale);
+            System.out.println("HORA LLEGADA: "+horallega);
+            System.out.println("AVION: "+ avion);
+            Random aleatorio = new Random();
+            var aleat = aleatorio.nextInt(1, 11);
+            System.out.println("Puerta de embargue: " + aleat);
         }
 
-    
+    }
 
     public void pagoTicket(String numeroTarjeta, Reserva reserva, double totalxpagar) {
         System.out.println("");
-        Pago pago1 = new Pago(reserva.getFechaReserva(), MetodoPago.TC, totalxpagar+(totalxpagar*0.10), reserva);
+        Pago pago1 = new Pago(reserva.getFechaReserva(), MetodoPago.TC, totalxpagar + (totalxpagar * 0.10), reserva);
         pago1.almacenarPago();
     }
 

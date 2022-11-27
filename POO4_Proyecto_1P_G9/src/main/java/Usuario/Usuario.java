@@ -95,6 +95,6 @@ public abstract class Usuario {
                 "Cedula = "+ cedula;
     }
     
-    public abstract void consultarReservas(ArrayList<vueloReservado> vuelosReservados);
+    public abstract void consultarReservas();
     
 }

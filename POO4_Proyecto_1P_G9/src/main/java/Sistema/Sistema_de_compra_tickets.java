@@ -124,10 +124,10 @@ public class Sistema_de_compra_tickets {
                     case "2":
                         if (u.getPerfil() == Perfil.S) {
                             Cliente c = (Cliente) u;
-                            c.consultarReservas(ArrayList<vueloReservado> vuelosReservados);
+                            c.consultarReservas();
                         } else {
                             ClienteVIP cvip = (ClienteVIP) u;
-                            cvip.consultarReservas(ArrayList<vueloReservado> vuelosReservados);
+                            cvip.consultarReservas();
                         }
 
                         break;
