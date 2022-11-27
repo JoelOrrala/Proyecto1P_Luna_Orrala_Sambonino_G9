@@ -35,7 +35,6 @@ public class ClienteVIP extends Cliente{
     public ClienteVIP(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, String numeroTarjeta, Rango tipoVIP, int millas){
         super(cedula,nombre,apellido,edad,correo,usuario,contrasenia,perfil,numeroTarjeta);
         this.tipoVIP = tipoVIP;
-//        this.millas = 1000;
         this.millas = millas;
     }
     /**
@@ -91,27 +90,26 @@ public class ClienteVIP extends Cliente{
  * @param total total a pagar
  */    
     public void pagoTicket(int millas, Reserva reserva, double total){
-    vueloReservado vueloIda= reserva.getListaVuelos().get(0);
-    int millasVueloIda = vueloIda.getVueloSeleccionado().getPrecioMillas();
-    vueloReservado vueloVuelta= reserva.getListaVuelos().get(1);
-    int millasVueloVuelta = vueloVuelta.getVueloSeleccionado().getPrecioMillas();
-    int totalmillas = millasVueloIda+millasVueloVuelta;
-    if (millas-totalmillas < 0){
-        System.out.println("No le alcanza las millas");
-        System.out.println("Debe pagar con tarjeta de credito: ");
-        System.out.println("Ingrese el numero de Tarjeta de credito:");
-        Scanner sc = new Scanner(System.in);
-        String tc = sc.nextLine();
-        this.pagoTicket(tc, reserva, total);
+
+        vueloReservado vueloIda = reserva.getListaVuelos().get(0);
+        int millasVueloIda = vueloIda.getVueloSeleccionado().getPrecioMillas();
+        vueloReservado vueloVuelta = reserva.getListaVuelos().get(1);
+        int millasVueloVuelta = vueloVuelta.getVueloSeleccionado().getPrecioMillas();
+        int totalmillas = millasVueloIda + millasVueloVuelta;
+        if (millas - totalmillas < 0) {
+            System.out.println("No le alcanza las millas");
+            System.out.println("Debe pagar con tarjeta de credito: ");
+            System.out.println("Ingrese el numero de Tarjeta de credito:");
+            Scanner sc = new Scanner(System.in);
+            String tc = sc.nextLine();
+            this.pagoTicket(tc, reserva, total);
     }
     else if (millas-totalmillas >= 0){
-        Date fechaPago = new Date();
-        int resta = millas-totalmillas;
-        Pago pago = new Pago(fechaPago, MetodoPago.M, total, reserva);
-        pago.almacenarPago();
+  
+            Date fechaPago = new Date();
+            int resta = millas - totalmillas;
+            Pago pago = new Pago(fechaPago, MetodoPago.M, total, reserva);
+            pago.almacenarPago();
     }
-    
-    
-
     }
 }

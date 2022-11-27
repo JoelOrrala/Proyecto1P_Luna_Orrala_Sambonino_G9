@@ -156,8 +156,8 @@ public abstract class Usuario {
  */
     @Override
     public String toString() {
-        return "Nombres = " + nombre + apellido +
-                "Cedula = "+ cedula;
+        return "Nombres = " + nombre + apellido
+                + "Cedula = " + cedula;
     }
     
 
