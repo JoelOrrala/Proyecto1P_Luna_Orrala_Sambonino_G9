@@ -42,8 +42,9 @@ public class ClienteVIP extends Cliente{
         this.millas = millas;
     }
     
-    public void consultarReservas(ArrayList<vueloReservado> vuelosReservados){
-        
+    @Override
+    public void consultarReservas(){
+        super.consultarReservas();
     }
      
     @Override
