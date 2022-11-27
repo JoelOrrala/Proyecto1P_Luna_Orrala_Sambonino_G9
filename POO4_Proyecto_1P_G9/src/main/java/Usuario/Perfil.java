@@ -8,6 +8,10 @@ package Usuario;
  *
  * @author joelorrala
  */
+
 public enum Perfil {
+    /**
+     * tipos deperfil de usuario
+     */
     S,V,O
 }

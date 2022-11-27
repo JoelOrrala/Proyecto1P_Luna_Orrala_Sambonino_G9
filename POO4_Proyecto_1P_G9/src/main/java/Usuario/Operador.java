@@ -16,15 +16,24 @@ public class Operador extends Usuario {
         super(cedula,nombre,apellido,edad,correo,usuario,contrasenia,perfil);
         this.sueldo=sueldo;
     }
-    
+ /**
+  * 
+  * @return 
+  */   
     public double getSueldo(){
         return sueldo;
     }
-    
+/**
+ * 
+ * @param sueldo 
+ */    
     public void setSueldo(double sueldo){
         this.sueldo = sueldo;
     }
-    
+/**
+ * 
+ */   
+    @Override
     public void consultarReservas(){
      
         ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
@@ -59,7 +68,10 @@ public class Operador extends Usuario {
             
         }
     }
-    
+/**
+ * 
+ * @param lista 
+ */
     public void consultarUsuarios(ArrayList<Usuario> lista){
         for (Usuario u: lista){
             if (u.getPerfil() == Perfil.S){
