@@ -13,25 +13,49 @@ import java.util.Random;
 import manejoArchivos.*;
 import Sistema.*;
 import java.util.Date;
-
+/**
+ * 
+ * clase cliente 
+ */
 public class Cliente extends Usuario {
 //public class Cliente {
-
+/**
+ * numero de tarjeta del cliente
+ */
     protected String numeroTarjeta;
-
+/**
+ * 
+ * @param cedula dato del cliente
+ * @param nombre dato del cliente
+ * @param apellido dato del cliente
+ * @param edad dato del cliente
+ * @param correo dato del cliente
+ * @param usuario dato del cliente
+ * @param contrasenia dato del cliente
+ * @param perfil dato del cliente
+ * @param numeroTarjeta  dato del cliente
+ */
     public Cliente(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, String numeroTarjeta) {
         super(cedula, nombre, apellido, edad, correo, usuario, contrasenia, perfil);
         this.numeroTarjeta = numeroTarjeta;
     }
-
+/**
+ * 
+ * @return numero de tarjeta del cliente
+ */
     public String getNumeroTarjeta() {
         return numeroTarjeta;
     }
-
+/**
+ * 
+ * @param numeroTarjeta numero de tarjeta del cliente
+ */
     public void setNumeroTarjeta(String numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
     }
-
+/**
+ * metodo compra de ticket
+ */
     public void comprarTicket() {
         ArrayList<String> lecturaVuelos = ManejoArchivos.LeeFichero("vuelos.txt");
         lecturaVuelos.remove(0);
@@ -450,7 +474,9 @@ public class Cliente extends Usuario {
             }
         }
     }
-
+/**
+ * 
+ */
     @Override
     public void consultarReservas() {
         ArrayList<String> lecturaReservas = ManejoArchivos.LeeFichero("reservas.txt");
@@ -495,7 +521,12 @@ public class Cliente extends Usuario {
         }
 
     }
-
+/**
+ * 
+ * @param numeroTarjeta numero de tarjeta del cliente
+ * @param reserva reserva del cliente
+ * @param total total a pagar
+ */
     public void pagoTicket(String numeroTarjeta, Reserva reserva, double totalxpagar) {
         System.out.println("");
         Pago pago1 = new Pago(reserva.getFechaReserva(), MetodoPago.TC, totalxpagar + (totalxpagar * 0.10), reserva);
