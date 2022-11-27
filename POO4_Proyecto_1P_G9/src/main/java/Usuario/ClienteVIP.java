@@ -38,6 +38,7 @@ public class ClienteVIP extends Cliente{
         
     }
     
+    @Override
     public void pagoTicket(String numeroTarjeta){
         super.pagoTicket(numeroTarjeta);
     }

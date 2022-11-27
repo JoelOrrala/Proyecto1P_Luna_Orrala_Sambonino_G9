@@ -41,7 +41,7 @@ public class Cliente extends Usuario {
         ArrayList<String> lecturaAviones = ManejoArchivos.LeeFichero("aviones.txt");
         lecturaAviones.remove(0);
         Scanner sc = new Scanner(System.in);
-        
+
         ArrayList<String> origenes = new ArrayList<>();
         System.out.println("---ORIGEN-----");
         int ind = 1;
@@ -140,9 +140,9 @@ public class Cliente extends Usuario {
                         Itinerario iti = new Itinerario(itinerary[1],itinerary[2],itinerary[3],durationD);
                         Vuelo outFlight = new Vuelo(avIda, outboundFligth[0], (double)listaprecios.get(5), iti, outboundFligth[2], outboundFligth[3]);
                         vueloIda = outFlight;
-                        }
-            }   
-        }
+                    }
+                }
+            }
         }
         Double precioida = Double.valueOf(listaprecios.get(opida).toString());
         String avionida = listaavionidad.get(opida).toString();
@@ -220,9 +220,9 @@ public class Cliente extends Usuario {
                         Itinerario iti2 = new Itinerario(itinerary2[1],itinerary2[2],itinerary2[3],duration2D);
                         Vuelo retFlight = new Vuelo(avRegreso, returnFligth[0], (double)listapreciosvuelta.get(5), iti2, returnFligth[2], returnFligth[3]);
                         vueloRegreso = retFlight;
-                        }
-            }   
-        }
+                    }
+                }
+            }
         }
         Double preciovuelta = Double.valueOf(listapreciosvuelta.get(opvuelta).toString());
         String avionvuelta = listaavionvuelta.get(opvuelta).toString();
@@ -298,7 +298,7 @@ public class Cliente extends Usuario {
         ArrayList<vueloReservado> vuelosReservados = new ArrayList<>();
         vuelosReservados.add(vueloReservadoIda);
         vuelosReservados.add(vueloReservadoRegreso);
-        
+
         System.out.println("Para tu vuelo de ida " + avionida + " se te ha asignado el asiento: " + asasig);
         System.out.println("Para tu vuelo de retorno " + avionvuelta + " se te ha asignado el asiento: " + asasigv);
 
@@ -341,7 +341,7 @@ public class Cliente extends Usuario {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
             System.out.printf("%35s\n", "PASO4");
             System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
-            
+
             double totalFinal = 0.00;
             System.out.println("Descripcion: ");
             System.out.println("");
@@ -402,7 +402,7 @@ public class Cliente extends Usuario {
                     j = 1;
                 } else if (fp == 2){
                     if (!(this instanceof ClienteVIP) || this.getPerfil() == Perfil.S){
-                    System.out.println("Usted no puede pagar con millas .....");
+                        System.out.println("Usted no puede pagar con millas .....");
                     }
                     else if (this instanceof ClienteVIP || this.getPerfil() == Perfil.V){
                         ClienteVIP clientVIP = (ClienteVIP)this;
@@ -416,7 +416,7 @@ public class Cliente extends Usuario {
     @Override
     public void consultarReservas(){
         System.out.println("xd");
-    }
+        }
 
     public void pagoTicket(String numeroTarjeta) {
         Date fechaRegistro = new Date();
@@ -427,7 +427,7 @@ public class Cliente extends Usuario {
             System.out.println("");
         }
     }
-    
+
 //    public static void main(String[] args) {
 //        Cliente c = new Cliente();
 //        c.comprarTicket();
