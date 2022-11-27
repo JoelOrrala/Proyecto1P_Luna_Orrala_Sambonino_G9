@@ -138,7 +138,7 @@ public class Cliente extends Usuario {
                         String duracionS = duration[0]+"."+duration[1];
                         double durationD = Double.parseDouble(duracionS);
                         Itinerario iti = new Itinerario(itinerary[1],itinerary[2],itinerary[3],durationD);
-                        Vuelo outFlight = new Vuelo(avIda, outboundFligth[0], (double)listaprecios.get(5), iti, outboundFligth[2], outboundFligth[3]);
+                        Vuelo outFlight = new Vuelo(avIda, outboundFligth[0], (double)listaprecios.get(5), iti, outboundFligth[2], outboundFligth[3],Integer.parseInt(outboundFligth[6]));
                         vueloIda = outFlight;
                         }
             }   
@@ -218,7 +218,7 @@ public class Cliente extends Usuario {
                         String duracion2S = duration2[0]+"."+duration2[1];
                         double duration2D = Double.parseDouble(duracion2S);
                         Itinerario iti2 = new Itinerario(itinerary2[1],itinerary2[2],itinerary2[3],duration2D);
-                        Vuelo retFlight = new Vuelo(avRegreso, returnFligth[0], (double)listapreciosvuelta.get(5), iti2, returnFligth[2], returnFligth[3]);
+                        Vuelo retFlight = new Vuelo(avRegreso, returnFligth[0], (double)listapreciosvuelta.get(5), iti2, returnFligth[2], returnFligth[3],Integer.parseInt(returnFligth[6]));
                         vueloRegreso = retFlight;
                         }
             }   
@@ -261,46 +261,49 @@ public class Cliente extends Usuario {
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
 
         System.out.println("--------ASIENTOS-------");
-        //asiento ida
-
-        String asasig = "";
-        String disp = "N";
-        while (disp.equals("N")) {
-            Random r = new Random();
-            int valorDado = r.nextInt(lecturaAsientos.size());
-            for (int q = 0; q < valorDado; q++) {
-                String[] inti = lecturaItinerarios.get(q).split(",");
-                disp = inti[2];
-                if (disp == "S") {
-                    asasig = inti[1];
-                }
-            }
-        }
+//        //asiento ida
+//        String asasig = "";
+//        String disp = "N";
+//        while (disp.equals("N")) {
+//            Random r = new Random();
+//            int valorDado = r.nextInt(lecturaAsientos.size());
+//            for (int q = 0; q < valorDado; q++) {
+//                String[] inti = lecturaItinerarios.get(q).split(",");
+//                disp = inti[2];
+//                if (disp == "S") {
+//                    asasig = inti[1];
+//                }
+//            }
+//        }
+        //Asiento reservado de ida
         vueloReservado vueloReservadoIda = new vueloReservado(vueloIda, TipoVuelo.IDA, tarifaIda);
         var asientoIda = vueloReservadoIda.getAsientoAsignado();
         System.out.println("Para tu vuelo de IDA "+vueloReservadoIda.getCodigoVR()+" se le ha asignado el vuelo: "+asientoIda);
 
-        //asientovuelta
-        String asasigv = "";
-        String dispv = "N";
-        while (dispv.equals("N")) {
-            Random r = new Random();
-            int valorDado = r.nextInt(lecturaAsientos.size());
-            for (int k = 0; k < valorDado; k++) {
-                String[] inti = lecturaItinerarios.get(k).split(",");
-                dispv = inti[2];
-                asasigv = inti[1];
-            }
-        }
+//        //asientovuelta
+//        String asasigv = "";
+//        String dispv = "N";
+//        while (dispv.equals("N")) {
+//            Random r = new Random();
+//            int valorDado = r.nextInt(lecturaAsientos.size());
+//            for (int k = 0; k < valorDado; k++) {
+//                String[] inti = lecturaItinerarios.get(k).split(",");
+//                dispv = inti[2];
+//                asasigv = inti[1];
+//            }
+//        }
+        //Asiento reservado de regreso
         vueloReservado vueloReservadoRegreso = new vueloReservado(vueloRegreso, TipoVuelo.VUELTA, tarifaVuelta);
         var asientoVuelta = vueloReservadoRegreso.getAsientoAsignado();
         System.out.println("Para tu vuelo de RETORNO "+vueloReservadoRegreso.getCodigoVR()+" se le ha asignado el vuelo: "+asientoVuelta);
+        
+        //Vuelos reservados
         ArrayList<vueloReservado> vuelosReservados = new ArrayList<>();
         vuelosReservados.add(vueloReservadoIda);
         vuelosReservados.add(vueloReservadoRegreso);
-        
-        System.out.println("Para tu vuelo de ida " + avionida + " se te ha asignado el asiento: " + asasig);
-        System.out.println("Para tu vuelo de retorno " + avionvuelta + " se te ha asignado el asiento: " + asasigv);
+////        
+////        System.out.println("Para tu vuelo de ida " + avionida + " se te ha asignado el asiento: " + asasig);
+////        System.out.println("Para tu vuelo de retorno " + avionvuelta + " se te ha asignado el asiento: " + asasigv);
 
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
         System.out.printf("%35s\n", "PASO3");
@@ -397,6 +400,7 @@ public class Cliente extends Usuario {
                     pagoTicket(tc);
                     Reserva reservationTicket = new Reserva(vuelosReservados, fsalida, this, (subtotal + iva));
                     String reservaTicket = reservationTicket.getGenerarCodigoReserva();
+//                  Pago pago1 = new Pago(fnac, MetodoPago.TC, 0, reservationTicket);
                     System.out.println("Has comprado tu vuelo. El codigo de reserva es: " + reservaTicket);
                     reservationTicket.almacenarReserva();
                     j = 1;

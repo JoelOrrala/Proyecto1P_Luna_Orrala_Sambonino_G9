@@ -1,6 +1,7 @@
 package Usuario;
 
 import Reservas.Rango;
+import Usuario.Cliente;
 
 /**
  *
@@ -37,15 +38,12 @@ public class ClienteVIP extends Cliente{
     public void consultarReservas(){
         
     }
-    
+     
     public void pagoTicket(String numeroTarjeta){
         super.pagoTicket(numeroTarjeta);
     }
     
     public void pagoTicket(int millas){
-        System.out.println("Total de millas: "+this.millas);
-        
-        
-        
+        System.out.println("Total de millas: "+this.millas); 
     }
 }
