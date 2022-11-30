@@ -5,7 +5,7 @@
 package Reservas;
 
 /**
- *
+ * Rangos que puede tener un cliente vip
  * @author joelorrala
  */
 public enum Rango {

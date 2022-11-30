@@ -5,9 +5,11 @@
 package Reservas;
 
 /**
- *
+ * Métodos de pago que puede elegir el usuario
+ * Tarjeta de crédito y Millas
  * @author joelorrala
  */
+
 public enum MetodoPago {
     TC,M
 }

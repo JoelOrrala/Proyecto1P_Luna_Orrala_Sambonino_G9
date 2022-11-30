@@ -1,8 +1,5 @@
 package Usuario;
 
-import SeleccionVuelo.vueloReservado;
-import java.util.ArrayList;
-
 /**
  *
  * @author L.Luna

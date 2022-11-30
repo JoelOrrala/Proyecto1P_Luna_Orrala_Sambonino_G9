@@ -8,13 +8,21 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-
 /**
+ * ManejoArchivos representará la lectura y escritura sobre archivos txt
+ * pertenecientes al sistema
  *
  * @author joelorrala
  */
 public class ManejoArchivos {
-    
+
+    /**
+     * Lee el archivo recibido y devuelve un ArrayList que contiene las lineas
+     * del archivo
+     *
+     * @param nombrearchivo nombre del archivo a leer
+     * @return
+     */
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;
@@ -25,7 +33,7 @@ public class ManejoArchivos {
             // Apertura del fichero y creacion de BufferedReader para poder
             // hacer una lectura comoda (disponer del metodo readLine()).
             archivo = new File(nombrearchivo);
-            fr = new FileReader(archivo,StandardCharsets.UTF_8);
+            fr = new FileReader(archivo, StandardCharsets.UTF_8);
             br = new BufferedReader(fr);
 
             // Lectura del fichero
@@ -54,15 +62,21 @@ public class ManejoArchivos {
 
     }
 
+    /**
+     * Escribe sobre un archivo una línea indicada
+     *
+     * @param nombreArchivo nombre del archivo
+     * @param linea linea que se va a escribir en el archivo
+     */
     public static void EscribirArchivo(String nombreArchivo, String linea) {
 
         FileWriter fichero = null;
         BufferedWriter bw = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter(nombreArchivo,true);
+            fichero = new FileWriter(nombreArchivo, true);
             bw = new BufferedWriter(fichero);
-            bw.write(linea+"\n");
+            bw.write(linea + "\n");
 //            System.out.println("ksdsdlsd");
 
         } catch (Exception e) {
@@ -81,5 +95,4 @@ public class ManejoArchivos {
         }
     }
 
-    
 }

@@ -5,8 +5,6 @@
 package Sistema;
 
 import Reservas.Rango;
-import Reservas.Reserva;
-import SeleccionVuelo.vueloReservado;
 import Usuario.Cliente;
 import Usuario.ClienteVIP;
 import Usuario.Operador;
@@ -17,32 +15,38 @@ import java.util.Scanner;
 import manejoArchivos.ManejoArchivos;
 
 /**
+ * Sistema_de_compra_tickets va representar a la ejecución de toda la aplicación
+ * de compra
  *
  * @author joelorrala
  */
 public class Sistema_de_compra_tickets {
 
     private ArrayList<Usuario> usuarios;
-    private ArrayList<Reserva> reservas;
     private Scanner sc;
 
+    /**
+     * Inicializa las variables sc y usuario
+     */
     public Sistema_de_compra_tickets() {
         sc = new Scanner(System.in);
         usuarios = GenerarUsuarios();
-        reservas = new ArrayList<>();
     }
 
+    /**
+     *
+     * @return lista de usuarios
+     */
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
-    public ArrayList<Reserva> getReservas() {
-        return reservas;
-    }
 
-    public void setReservas(ArrayList<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-
+    /**
+     * Recorrerá los archivos: usuarios.txt, clientes.txt y operadores.txt para
+     * finalmente crear los usuarios
+     *
+     * @return usuarios registrados en el sistema
+     */
     public ArrayList<Usuario> GenerarUsuarios() {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         ArrayList<String> lecturaUsuarios = ManejoArchivos.LeeFichero("usuarios.txt");
@@ -91,12 +95,20 @@ public class Sistema_de_compra_tickets {
         return usuarios;
     }
 
+    /**
+     * Muestra el mensaje de bienvenida al usuario cuando entra al sistema
+     */
     public static void mostrarBienvenida() {
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++" + "\n");
         System.out.printf("%35s\n", "BIENVENIDO AL SISTEMA");
         System.out.println("\n" + "+++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 
+    /**
+     * Muestra el menú al usuario dependiendo de su tipo
+     *
+     * @param u Usuario que inició sesión en el sistema
+     */
     public void mostrarMenu(Usuario u) {
         String entrada = "";
 
@@ -177,6 +189,15 @@ public class Sistema_de_compra_tickets {
 
     }
 
+    /**
+     * Verifica que los datos ingresados por el usuario en uso sean o no del
+     * usuario registrado seleccionado
+     *
+     * @param u usuario que ya pertenece al Arraylist de Usuarios del sistema
+     * @param usuarioIngreso usuario ingresado por la usuario en uso
+     * @param contraseniaIngreso contraseña ingresada por el usuario en uso
+     * @return
+     */
     public static boolean verificarDatosCliente(Usuario u, String usuarioIngreso, String contraseniaIngreso) {
         if (usuarioIngreso.equals(u.getUsuario()) && contraseniaIngreso.equals(u.getContrasenia())) {
             return true;
@@ -185,6 +206,10 @@ public class Sistema_de_compra_tickets {
         }
     }
 
+    /**
+     * Al iniciar el programa pide a usuario en uso que ingrese su usuario y
+     * contraseña para ser verificados, y dar paso o no al resto del programa
+     */
     public void iniciarSesion() {
         mostrarBienvenida();
         System.out.print("USUARIO: ");
@@ -206,6 +231,11 @@ public class Sistema_de_compra_tickets {
         }
     }
 
+    /**
+     * Main del programa
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         Sistema_de_compra_tickets sistema = new Sistema_de_compra_tickets();

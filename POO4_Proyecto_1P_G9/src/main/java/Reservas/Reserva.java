@@ -4,83 +4,144 @@
  */
 package Reservas;
 import static Funcion.Funcion.generarLetraAleatoria;
-import SeleccionVuelo.Vuelo;
 import SeleccionVuelo.vueloReservado;
 import java.util.ArrayList;
 import Usuario.Cliente;
 import manejoArchivos.ManejoArchivos;
 import java.util.Date;
 /**                                                                                                                                                                                                                                                                                                                                                               
- *
+ * Reserva representa todos los datos de vuelos que el usuario reservó
  * @author joelorrala
  */
 public class Reserva {
- 
+
     private String codigo;
     private ArrayList<vueloReservado> listaVuelos;
     private Date fechaReserva;
     private Cliente cliente;
     private double valorPagar;
-    
-    public Reserva(ArrayList<vueloReservado> listaVuelos,Date fechaReserva,Cliente cliente,double valorPagar){
+
+    /**
+     * Crea una reserva recibiendo como parámetros la lista de vuelos
+     * reservados, la fecha en que se realizó la reserva, el cliente y valor a
+     * pagar
+     *
+     * @param listaVuelos
+     * @param fechaReserva
+     * @param cliente
+     * @param valorPagar
+     */
+    public Reserva(ArrayList<vueloReservado> listaVuelos, Date fechaReserva, Cliente cliente, double valorPagar) {
         this.codigo = generarCodigoReserva();
         this.listaVuelos = listaVuelos;
         this.fechaReserva = fechaReserva;
         this.cliente = cliente;
         this.valorPagar = valorPagar;
     }
-    
-    public String getCodigo(){
+
+    /**
+     * Devuelve el código de la reserva
+     *
+     * @return código reserva
+     */
+    public String getCodigo() {
         return codigo;
     }
-    
-    public ArrayList<vueloReservado> getListaVuelos(){
+
+    /**
+     * Devuelve la lista de vuelos reservados
+     *
+     * @return vuelos reservados
+     */
+    public ArrayList<vueloReservado> getListaVuelos() {
         return listaVuelos;
     }
-    
-    public void setListaVuelos(ArrayList<vueloReservado> listaVuelos){
+
+    /**
+     * Cambia la lista de vuelos reservados
+     *
+     * @param listaVuelos lista de vuelos reservados
+     */
+    public void setListaVuelos(ArrayList<vueloReservado> listaVuelos) {
         this.listaVuelos = listaVuelos;
     }
-    
-    public Date getFechaReserva(){
+
+    /**
+     * Devuelve la fecha de la reserva
+     *
+     * @return fecha reserva
+     */
+    public Date getFechaReserva() {
         return fechaReserva;
     }
-    
-    public void setFechaReserva(Date fechaReserva){
+
+    /**
+     * Cambia la fecha de la reserva
+     *
+     * @param fechaReserva fecha de la reserva
+     */
+    public void setFechaReserva(Date fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
-    
-    public Cliente getCliente(){
+
+    /**
+     * Devuelve el cliente al cual le pertenece la reserva
+     *
+     * @return cliente dueño de la reserva
+     */
+    public Cliente getCliente() {
         return cliente;
     }
-    
-    public void setCliente(Cliente cliente){
+
+    /**
+     * Cambia el cliente que hizo la reserva
+     *
+     * @param cliente cliente
+     */
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    public double getValorPagar(){
+
+    /**
+     * Retorna el valor a pagar de la reserva
+     *
+     * @return valor a pagar
+     */
+    public double getValorPagar() {
         return valorPagar;
     }
-    
-    private String generarCodigoReserva(){
-        String codigo = ""; 
-        for (int i = 1; i <= 5; i++){
+
+    /**
+     * Retorna el código generado para la reserva
+     *
+     * @return código reserva
+     */
+    public String getGenerarCodigoReserva() {
+        return generarCodigoReserva();
+    }
+
+    /**
+     * Devuelve un código aleatorio para la reserva, el cual posee únicamente
+     * letras
+     *
+     * @return código para la reserva
+     */
+    private String generarCodigoReserva() {
+        String codigo = "";
+        for (int i = 1; i <= 5; i++) {
             codigo += generarLetraAleatoria();
         }
         return codigo;
     }
-    public String getGenerarCodigoReserva(){
-        return generarCodigoReserva();
-    }
-    
+
+    /**
+     * Almacena en el archivo reservas.txt la reserva a la que se hace
+     * referencia
+     */
     public void almacenarReserva() {
-        for (vueloReservado v: listaVuelos){
+        for (vueloReservado v : listaVuelos) {
             ManejoArchivos.EscribirArchivo("reservas.txt", codigo + "," + v.getVueloSeleccionado().getCodigo() + "," + cliente.getNombre() + " " + cliente.getApellido() + "," + fechaReserva + "," + valorPagar);
         }
     }
-   
-    public void consultarReserva(){
-     
-    }
-    
+
 }
