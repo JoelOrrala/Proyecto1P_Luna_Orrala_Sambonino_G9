@@ -1,13 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
+
 package SeleccionVuelo;
 
 /**
- *
+ * Enum con opciones de tipos
+ * de vuelo
+ * 
  * @author Giovanni
  */
+
 public enum TipoVuelo {
-    IDA,VUELTA
+    
+    /**
+     * Opcion de vuelo de ida
+     */
+    
+    IDA,
+
+    /**
+     * Opcion de vuelo de retorno
+     */
+    VUELTA
 }

@@ -2,12 +2,21 @@
 package SeleccionVuelo;
 
 /**
- *
+ *Enum con las opciones de la 
+ * disponibilidad del asiento
+ * 
  * @author joelorrala
  */
+
 public enum Disponibilidad {
+    
     /**
-     * Disponibilidad entre libre u ocupado del asiento
+     * Disponibilidad Libre
      */
-    S,N
+    S,
+
+    /**
+     *Disponibilidad Ocupado
+     */
+    N
 }
