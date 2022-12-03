@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
+
 package SeleccionVuelo;
 
 /**
@@ -9,5 +6,8 @@ package SeleccionVuelo;
  * @author joelorrala
  */
 public enum Disponibilidad {
+    /**
+     * Disponibilidad entre libre u ocupado del asiento
+     */
     S,N
 }
