@@ -12,7 +12,7 @@ import manejoArchivos.ManejoArchivos;
  *
  * @author joelorrala
  */
-public class vueloReservado{
+public class vueloReservado {
 
     private String codigoVR;
     private Vuelo vueloSeleccionado;
@@ -20,6 +20,13 @@ public class vueloReservado{
     private Tarifa tarifa;
     private String asientoAsignado;
 
+    /**
+     * Constructor de la clase VueloReservado
+     *
+     * @param vueloSeleccionado vuelo seleccionado
+     * @param tipo Tipo de vuelo que pueden llegar a ser IDA o VUELTA
+     * @param tarifa Tarifa del vuelo
+     */
     public vueloReservado(Vuelo vueloSeleccionado, TipoVuelo tipo, Tarifa tarifa) {
         this.codigoVR = generarCodigoVR();
         this.vueloSeleccionado = vueloSeleccionado;
@@ -27,39 +34,86 @@ public class vueloReservado{
         this.tarifa = tarifa;
         this.asientoAsignado = asignarAsiento();
     }
-    
-    public String getCodigoVR(){
+
+    /**
+     * Metodo get la variable codigoVR
+     *
+     * @return El codigo correspondiente al vuelo reservado
+     */
+    public String getCodigoVR() {
         return codigoVR;
     }
-    
-    public Vuelo getVueloSeleccionado(){
+
+    /**
+     * Metodo get de la variable vueloSeleccionado
+     *
+     * @return El vuelo seleccionado
+     */
+    public Vuelo getVueloSeleccionado() {
         return vueloSeleccionado;
     }
 
+    /**
+     * Metodo get de la variable tipoTipo
+     *
+     * @return Un tipo de vuelo
+     */
     public TipoVuelo getTipo() {
         return tipo;
     }
+
+    /**
+     * Metodo set de la variable tipo
+     *
+     * @param tipo Argumento del TipoVuelo;
+     */
 
     public void setTipo(TipoVuelo tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Metodo get de la variable tarifa
+     *
+     * @return La tarifa del vuelo seleccionado
+     */
     public Tarifa getTarifa() {
         return tarifa;
     }
+
+    /**
+     * Metodo set de la tarifa
+     *
+     * @param tarifa Argumento de tipo Tarifa
+     */
 
     public void setTarifa(Tarifa tarifa) {
         this.tarifa = tarifa;
     }
 
+    /**
+     * Metodo get de asientoAsignado
+     *
+     * @return Asiento asignado
+     */
     public String getAsientoAsignado() {
         return asientoAsignado;
     }
 
+    /**
+     * Metodo set de la variable asientoAsignado
+     *
+     * @param asientoAsignado Argumento de tipo String del asientoAsignado
+     */
     public void setAsientoAsignado(String asientoAsignado) {
         this.asientoAsignado = asientoAsignado;
     }
 
+    /**
+     * Metodo que te asigna un asiento
+     *
+     * @return Asiento
+     */
     private String asignarAsiento() {
         ArrayList<Asiento> listaAsiento = vueloSeleccionado.getAvion().getListaAsiento();
         boolean disponible = false;
@@ -75,25 +129,26 @@ public class vueloReservado{
         }
         return asiento;
     }
-    
-     private String generarCodigoVR(){
+
+    /**
+     * Genera el codigo del vuelo Reservado
+     *
+     * @return Codigo del vuelo Reservado
+     */
+    private String generarCodigoVR() {
         String codigo = "";
-        for (int i = 1; i <= 4; i++){
-            int numero = generarNumeroAleatorio(0,10);
+        for (int i = 1; i <= 4; i++) {
+            int numero = generarNumeroAleatorio(0, 10);
             codigo += numero;
         }
         return codigo;
     }
-    
-     public void almacenarVR(){
-         ManejoArchivos.EscribirArchivo("vuelosReserva.txt",codigoVR+","+vueloSeleccionado.getCodigo()+","+tipo+","+tarifa+","+asientoAsignado);
-     }
-    
-//    public static void main(String[] args){
-//        Avion a = new Avion("Airbus A319",61);
-//        Vuelo v = new Vuelo(a,"LA1437",482.89,new Itinerario(),"1/11/2022","1/11/2022");
-//        vueloReservado vr = new vueloReservado(v,TipoVuelo.IDA,Tarifa.ECONOMY);
-//        System.out.println(vr.generarAsiento());
-//    }
-    
+
+    /**
+     * Almacena el codigo del vueloReservado
+     */
+    public void almacenarVR() {
+        ManejoArchivos.EscribirArchivo("vuelosReserva.txt", codigoVR + "," + vueloSeleccionado.getCodigo() + "," + tipo + "," + tarifa + "," + asientoAsignado);
+    }
+
 }
