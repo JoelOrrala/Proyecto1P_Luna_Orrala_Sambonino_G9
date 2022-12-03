@@ -3,14 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Reservas;
+
 import static Funcion.Funcion.generarLetraAleatoria;
 import SeleccionVuelo.vueloReservado;
 import java.util.ArrayList;
 import Usuario.Cliente;
 import manejoArchivos.ManejoArchivos;
 import java.util.Date;
-/**                                                                                                                                                                                                                                                                                                                                                               
+
+/**
  * Reserva representa todos los datos de vuelos que el usuario reservó
+ *
  * @author joelorrala
  */
 public class Reserva {

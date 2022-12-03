@@ -10,32 +10,36 @@ import manejoArchivos.ManejoArchivos;
  * @author L.Luna
  */
 public class Operador extends Usuario {
+
     double sueldo;
-    
-    public Operador(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, double sueldo){
-        super(cedula,nombre,apellido,edad,correo,usuario,contrasenia,perfil);
-        this.sueldo=sueldo;
-    }
- /**
-  * 
-  * @return 
-  */   
-    public double getSueldo(){
-        return sueldo;
-    }
-/**
- * 
- * @param sueldo 
- */    
-    public void setSueldo(double sueldo){
+
+    public Operador(String cedula, String nombre, String apellido, int edad, String correo, String usuario, String contrasenia, Perfil perfil, double sueldo) {
+        super(cedula, nombre, apellido, edad, correo, usuario, contrasenia, perfil);
         this.sueldo = sueldo;
     }
-/**
- * 
- */   
+
+    /**
+     *
+     * @return
+     */
+    public double getSueldo() {
+        return sueldo;
+    }
+
+    /**
+     *
+     * @param sueldo
+     */
+    public void setSueldo(double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    /**
+     *
+     */
     @Override
-    public void consultarReservas(){
-     
+    public void consultarReservas() {
+
         ArrayList<String> lecturaAsientos = ManejoArchivos.LeeFichero("asientos.txt");
         lecturaAsientos.remove(0);
         ArrayList<String> lecturaVuelos = ManejoArchivos.LeeFichero("vuelos.txt");
@@ -55,36 +59,37 @@ public class Operador extends Usuario {
                 }
             }
 
-            for (String lineaR : lecturaReservas){
+            for (String lineaR : lecturaReservas) {
                 String[] datosRe = lineaR.split(",");
-                if (codigoVuelo.equals(datosRe[1])){
+                if (codigoVuelo.equals(datosRe[1])) {
                     cantidadReser++;
-                }      
+                }
             }
-            
-            System.out.println("VUELO: "+codigoVuelo);
-            System.out.println("CANTIDAD RESERVADOS: "+cantidadReser);
+
+            System.out.println("VUELO: " + codigoVuelo);
+            System.out.println("CANTIDAD RESERVADOS: " + cantidadReser);
             System.out.println("---------------------------------------------");
-            
+
         }
     }
-/**
- * 
- * @param lista 
- */
-    public void consultarUsuarios(ArrayList<Usuario> lista){
-        for (Usuario u: lista){
-            if (u.getPerfil() == Perfil.S){
-                Cliente c = (Cliente)u;
-                System.out.printf("%s %s,CLIENTE ESTÁNDAR,%s%n",c.getNombre(),c.getApellido(),c.getCedula());
-            }else if (u.getPerfil() == Perfil.V){
-                ClienteVIP cvip = (ClienteVIP)u;
-                System.out.printf("%s %s,CLIENTE VIP,%s,%s%n",cvip.getNombre(),cvip.getApellido(),cvip.getTipoVIP(),cvip.getCedula());
-            }else if (u.getPerfil() == Perfil.O){
-                Operador o = (Operador)u;
-                System.out.printf("%s %s,OPERADOR,%.2f,%s%n",o.getNombre(),o.getApellido(),o.getSueldo(),o.getCedula());
+
+    /**
+     *
+     * @param lista
+     */
+    public void consultarUsuarios(ArrayList<Usuario> lista) {
+        for (Usuario u : lista) {
+            if (u.getPerfil() == Perfil.S) {
+                Cliente c = (Cliente) u;
+                System.out.printf("%s %s,CLIENTE ESTÁNDAR,%s%n", c.getNombre(), c.getApellido(), c.getCedula());
+            } else if (u.getPerfil() == Perfil.V) {
+                ClienteVIP cvip = (ClienteVIP) u;
+                System.out.printf("%s %s,CLIENTE VIP,%s,%s%n", cvip.getNombre(), cvip.getApellido(), cvip.getTipoVIP(), cvip.getCedula());
+            } else if (u.getPerfil() == Perfil.O) {
+                Operador o = (Operador) u;
+                System.out.printf("%s %s,OPERADOR,%.2f,%s%n", o.getNombre(), o.getApellido(), o.getSueldo(), o.getCedula());
             }
         }
     }
-    
+
 }

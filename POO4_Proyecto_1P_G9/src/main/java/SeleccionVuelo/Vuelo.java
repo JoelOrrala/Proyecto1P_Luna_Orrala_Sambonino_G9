@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package SeleccionVuelo;
 
 /**
@@ -9,6 +6,7 @@ package SeleccionVuelo;
  * @author Giovanni
  */
 public class Vuelo {
+
     private Avion avion;
     private String codigo;
     private double precio;
@@ -17,7 +15,7 @@ public class Vuelo {
     private String fechaLLegada;
     private int precioMillas;
 
-    public Vuelo(Avion avion,String codigo, double precio, Itinerario codigoItinerario, String fechaSalida, String fechaLLegada, int precioMillas) {
+    public Vuelo(Avion avion, String codigo, double precio, Itinerario codigoItinerario, String fechaSalida, String fechaLLegada, int precioMillas) {
         this.avion = avion;
         this.codigo = codigo;
         this.precio = precio;
@@ -26,8 +24,8 @@ public class Vuelo {
         this.fechaLLegada = fechaLLegada;
         this.precioMillas = precioMillas;
     }
-    
-    public Avion getAvion(){
+
+    public Avion getAvion() {
         return avion;
     }
 
@@ -78,7 +76,5 @@ public class Vuelo {
     public void setFechaLLegada(String fechaLLegada) {
         this.fechaLLegada = fechaLLegada;
     }
-    
-    
-    
+
 }

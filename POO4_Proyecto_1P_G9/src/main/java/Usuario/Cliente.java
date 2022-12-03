@@ -12,9 +12,10 @@ import Reservas.*;
 import java.util.Random;
 import manejoArchivos.*;
 import java.util.Date;
+
 /**
- * 
- * clase cliente 
+ *
+ * clase cliente
  */
 public class Cliente extends Usuario {
 
@@ -501,7 +502,7 @@ public class Cliente extends Usuario {
      *
      * @param numeroTarjeta numero de tarjeta del cliente
      * @param reserva reserva del cliente
-     * @param total total a pagar
+     * @param totalxpagar total a pagar
      */
     public void pagoTicket(String numeroTarjeta, Reserva reserva, double totalxpagar) {
         System.out.println("");

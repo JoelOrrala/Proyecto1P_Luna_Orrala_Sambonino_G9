@@ -5,9 +5,17 @@
 package Reservas;
 
 /**
- * Rangos que puede tener un cliente vip
+ * Enum con los Rangos que puede tener un cliente vip
+ *
  * @author joelorrala
  */
 public enum Rango {
-    GOLD_PASS,PLATINUM_PASS
+    /**
+     * Rango Gold Pass
+     */
+    GOLD_PASS,
+    /**
+     * Rango Platinum Pass
+     */
+    PLATINUM_PASS
 }
